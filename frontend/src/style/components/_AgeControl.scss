@@ -1,0 +1,23 @@
+.age-control {
+  @include flex-row;
+  cursor: pointer;
+
+  span {
+    &:hover {
+      text-decoration: underline;
+    }
+
+    svg {
+      margin: 0 5px;
+      fill: $text-color;
+    }
+  }
+
+  @import './input';
+  input {
+    width: 42px;
+    height: 30px;
+    padding: 0;
+    text-align: center;
+  }
+}

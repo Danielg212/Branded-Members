@@ -1,0 +1,180 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #161415;
+}
+
+.BRANDED-MEMBERS {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.BRANDED-MEMBERS header {
+  height: 100px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.BRANDED-MEMBERS header .branded-logo {
+  width: 264px;
+  height: 49px;
+}
+
+.BRANDED-MEMBERS main {
+  min-height: calc(100vh - 100px);
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.BRANDED-MEMBERS main h2 {
+  color: #eb3756;
+}
+
+.BRANDED-MEMBERS main form {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.BRANDED-MEMBERS main form .inp-group {
+  position: relative;
+  margin-top: 24px;
+}
+
+.BRANDED-MEMBERS main form .inp-group input {
+  width: 300px;
+  height: 35px;
+  padding-left: 10px;
+  background: linear-gradient(to bottom, #fafafa -42%, #161415 42%);
+  border: 1px solid #7e7e7e;
+  border-radius: 7px;
+  color: #fafafa;
+  font-size: 14px;
+  cursor: text;
+  outline: none;
+}
+
+.BRANDED-MEMBERS main form .inp-group input:placeholder-shown + label {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.BRANDED-MEMBERS main form .inp-group label {
+  position: absolute;
+  right: 10px;
+  transform: translate(0, -1rem);
+  font-size: 12px;
+  color: #eb3756;
+  cursor: not-allowed;
+  transition: all 0.3s;
+}
+
+.BRANDED-MEMBERS main .controls {
+  width: 100%;
+  margin-top: 30px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.BRANDED-MEMBERS main table {
+  margin: 10px 0 50px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-collapse: collapse;
+  border-radius: 10px;
+  color: #fafafa;
+}
+
+.BRANDED-MEMBERS main table tr:hover td {
+  color: #fafafa;
+}
+
+.BRANDED-MEMBERS main table tr th {
+  padding: 10px 15px;
+  border-bottom: 0.5px solid #fafafa;
+  text-align: left;
+}
+
+.BRANDED-MEMBERS main table tr td {
+  padding: 5px 15px;
+  color: #7e7e7e;
+}
+
+@media (max-width: 768px) {
+  .BRANDED-MEMBERS main .not-mobile {
+    display: none;
+  }
+}
+
+.BRANDED-MEMBERS main .btn {
+  width: 120px;
+  margin: 10px;
+  padding: 12px 0;
+  background: linear-gradient(to bottom, #eb3756, #161415);
+  border-top: 1px solid #fafafa;
+  border-left: 1px solid #fafafa;
+  border-bottom: 1px solid #7e7e7e;
+  border-right: 1px solid #7e7e7e;
+  border-radius: 10px;
+  color: #fafafa;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.BRANDED-MEMBERS main .btn:hover, .BRANDED-MEMBERS main .btn:active {
+  font-weight: 900;
+}
+
+.BRANDED-MEMBERS main .age-control {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  cursor: pointer;
+}
+
+.BRANDED-MEMBERS main .age-control span:hover {
+  text-decoration: underline;
+}
+
+.BRANDED-MEMBERS main .age-control span svg {
+  margin: 0 5px;
+  fill: #fafafa;
+}
+
+.BRANDED-MEMBERS main .age-control input {
+  width: 300px;
+  height: 35px;
+  padding-left: 10px;
+  background: linear-gradient(to bottom, #fafafa -42%, #161415 42%);
+  border: 1px solid #7e7e7e;
+  border-radius: 7px;
+  color: #fafafa;
+  font-size: 14px;
+  cursor: text;
+  outline: none;
+}
+
+.BRANDED-MEMBERS main .age-control input:placeholder-shown + label {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.BRANDED-MEMBERS main .age-control input {
+  width: 42px;
+  height: 30px;
+  padding: 0;
+  text-align: center;
+}
+/*# sourceMappingURL=style.css.map */

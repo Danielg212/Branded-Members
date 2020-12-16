@@ -1,0 +1,57 @@
+@import './abstracts/variables';
+@import './abstracts/mixins';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: $background-color;
+}
+
+.BRANDED-MEMBERS {
+  width: 100%;
+  min-height: 100vh;
+
+  header {
+    height: 100px;
+    @include flex-row;
+    justify-content: center;
+
+    .branded-logo {
+      width: 264px;
+      height: 49px;
+    }
+  }
+
+  main {
+    min-height: calc(100vh - 100px);
+    @include flex-col;
+
+    h2 {
+      color: $accent-color;
+    }
+
+    form {
+      @include flex-col;
+      @import './components/InputGroup';
+    }
+
+    .controls {
+      width: 100%;
+      margin-top: 30px;
+      @include flex-row;
+      align-items: center;
+      justify-content: space-evenly;
+    }
+
+    @import './components/table';
+    @import './components/btn';
+    @import './components//AgeControl';
+  }
+}
