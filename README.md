@@ -1,2 +1,2 @@
 # Branded Members
- interview assignment @ branded.co.il
+ Interview assignment @ [Branded](https://www.branded.co.il)
