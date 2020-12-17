@@ -1,17 +1,18 @@
 import mongoose from 'mongoose'; // MongoDB
 import express, { json } from 'express'; // Backend App
+import dotenv from 'dotenv'; // Secures content
 import cors from 'cors'; // HTTP requests
 import usersRoutes from './routes/users.js';
 
 const app = express();
-const DATABASE = 'brandedDB';
-const URL = `mongodb://localhost:27017/${DATABASE}`; // I am using the mongodb community server
-const PORT = 4000;
-const mongodbDeprecateFix = { useNewUrlParser: true, useUnifiedTopology: true };
+dotenv.config();
 
+// required to fix deprecation warnings with mongoose
+const mongodbDeprecateFix = { useNewUrlParser: true, useUnifiedTopology: true };
+// i am using the mongodb community server
 mongoose
-  .connect(URL, mongodbDeprecateFix)
-  .then(() => app.listen(PORT, () => console.log(`✅ Server is running on port: ${PORT}`)))
+  .connect(process.env.URL, mongodbDeprecateFix)
+  .then(() => app.listen(process.env.PORT, () => console.log(`✅ Server is running on port: ${process.env.PORT}`)))
   .catch((error) => console.log(`❌ ${error}`));
 
 app.use(json()); // body parse
