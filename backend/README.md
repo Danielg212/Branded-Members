@@ -11,6 +11,8 @@ source: [https://www.mongodb.com](https://www.mongodb.com)
 2. `sudo rm -rf /Library/Developer/CommandLineTools`
 3. `sudo xcode-select —install`
 
+<img src='./img/install_clt.png' alt='install clt' width='500' />
+
 ### STEP 2: Install Homebrew
 
 1. [https://brew.sh](https://brew.sh)
