@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import InputGroup from './InputGroup';
-import LinkBtn from './LinkBtn';
+import InputGroup from './../InputGroup';
+import LinkBtn from './../LinkBtn';
 import BrandedMembers from './BrandedMembers';
 
-function Login() {
+export default function Login() {
   const usersData = useSelector((state) => state.users);
   const [form, setForm] = useState({ email: '', password: '' });
   const [loggedIn, setLoggedIn] = useState(false);
@@ -15,10 +15,13 @@ function Login() {
     // if user is found by input email, then return it to 'user'
     let [user] = usersData.filter((item) => item.email === form.email && item);
 
-    // if user exists & password is correct, set 'logged in' state, and reset input fileds
+    // if user exists
     if (user) {
+      // & password is correct,
       if (user.password === form.password) {
+        // set 'logged in' state,
         setLoggedIn(user);
+        // and reset input fileds
         setForm({ email: '', password: '' });
       } else {
         window.alert('Password is incorrect.');
@@ -29,8 +32,10 @@ function Login() {
   };
 
   return loggedIn ? (
-    <BrandedMembers usersData={usersData} loggedIn={loggedIn} />
+    // if the user is logged in (state updated from false), then access will be granted to the following
+    <BrandedMembers loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
   ) : (
+    // if the user is not logged in (state is false), then apply the following UI to login
     <form onSubmit={handleSubmit}>
       <InputGroup name='email' type='email' placeholder='Email:' formState={[form, setForm]}>
         johndoe@example.com
@@ -43,10 +48,8 @@ function Login() {
         <button type='submit' className='btn'>
           Login!
         </button>
-        <LinkBtn to='/' text='Home' />
+        <LinkBtn to='/register' text='Register...' />
       </div>
     </form>
   );
 }
-
-export default Login;

@@ -1,15 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function LinkBtn({ to, text, children }) {
+export default function LinkBtn({ to, text }) {
   return (
     <Link to={to}>
-      <button className={children ? 'btn-no-style' : 'btn'}>
-        {text}
-        {children}
-      </button>
+      <button className='btn'>{text}</button>
     </Link>
   );
 }
-
-export default LinkBtn;

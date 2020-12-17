@@ -19,8 +19,9 @@ body {
   min-height: 100vh;
 
   header {
-    height: 100px;
+    height: 80px;
     @include flex-row;
+    align-items: flex-end;
     justify-content: center;
 
     .branded-logo {
@@ -32,6 +33,7 @@ body {
   main {
     min-height: calc(100vh - 100px);
     @include flex-col;
+    justify-content: center;
 
     h2 {
       color: $accent-color;
@@ -50,8 +52,7 @@ body {
       justify-content: space-evenly;
     }
 
+    @import './components/button';
     @import './components/table';
-    @import './components/btn';
-    @import './components//AgeControl';
   }
 }

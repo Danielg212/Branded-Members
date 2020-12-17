@@ -26,7 +26,7 @@ source: [https://www.mongodb.com](https://www.mongodb.com)
 1. open terminal
 2. `mongo —version`
 
-<img src='./readme_files/install_success.png' alt='install success' width='500' />
+<img src='./img/install_success.png' alt='install success' width='500' />
 
 ## How to use MongoDB:
 
@@ -37,7 +37,7 @@ source: [https://www.mongodb.com](https://www.mongodb.com)
 3. `mongo` opens shell
 4. type `help` for more
 
-<img src='./readme_files/service_start.png' alt='service started' width='500' />
+<img src='./img/service_start.png' alt='service started' width='500' />
 
 ### STOP:
 
@@ -56,13 +56,13 @@ source: [https://www.mongodb.com](https://www.mongodb.com)
 3. `sudo chown <username> /usr/local/var/log/mongodb` allows read & write access
 4. `mongod —config /usr/local/etc/mongod.conf` starts the service manually
 
-<img src='./readme_files/service_start_manually.png' alt='service started manually' width='500' />
+<img src='./img/service_start_manually.png' alt='service started manually' width='500' />
 
 5. open new terminal
 6. `mongo` opens shell
 7. type `help` for more
 
-<img src='./readme_files/shell_started.png' alt='shell started' width='500' />
+<img src='./img/shell_started.png' alt='shell started' width='500' />
 
 ### STOP:
 
