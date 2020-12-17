@@ -12,8 +12,8 @@ const mongodbDeprecateFix = { useNewUrlParser: true, useUnifiedTopology: true };
 mongoose
   .connect(URL, mongodbDeprecateFix)
   .then(() => app.listen(PORT, () => console.log(`✅ Server is running on port: ${PORT}`)))
-  .catch((error) => console.warn(`❌ ${error}`));
+  .catch((error) => console.log(`❌ ${error}`));
 
 app.use(json()); // body parse
 app.use(cors()); // enable CORS
-app.use('/branded-members', usersRoutes); // get & post requests
+app.use('/branded', usersRoutes); // get & post requests

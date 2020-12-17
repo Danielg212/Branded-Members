@@ -8,7 +8,7 @@ export const getUsers = async (req, res) => {
     console.log(`✅ -FOUND- MongoDB:`, allUsers);
     res.status(200).json(allUsers); // respond with data
   } catch (error) {
-    console.warn(`❌ ${error}`);
+    console.log(`❌ ${error}`);
     res.status(404).json({ message: error.message }); // respond with error
   }
 };
@@ -30,7 +30,7 @@ export const createUser = async (req, res) => {
     console.log(`✅ -SAVED- MongoDB:`, newUser);
     res.status(201).json(newUser); // respond with success
   } catch (error) {
-    console.warn(`❌ ${error}`);
+    console.log(`❌ ${error}`);
     res.status(409).json({ message: error.message }); // respond with error
   }
 };
