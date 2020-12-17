@@ -83,13 +83,14 @@ const verifyName = (name) => {
 };
 
 const verifyEmail = (email, users) => {
-  let isValid = true;
+  let isValid;
   // checks that no one is already using that email address
-  users.forEach((user) => {
-    if (user.email === email) {
-      isValid = false;
-    }
-  });
+  let found = users.find((user) => user.email === email);
+  if (found) {
+    isValid = false;
+  } else {
+    isValid = true;
+  }
   // returns 'true' if valid, 'false' otherwise
   return isValid;
 };
