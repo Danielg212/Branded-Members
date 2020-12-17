@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import InputGroup from './../InputGroup';
-import LinkBtn from './../LinkBtn';
+import { InputGroup } from '../InputGroup/InputGroup';
+import { Button, LinkButton } from './../Buttons/Buttons';
 import BrandedMembers from './BrandedMembers';
 
 export default function Login() {
@@ -19,7 +19,7 @@ export default function Login() {
     if (user) {
       // & password is correct,
       if (user.password === form.password) {
-        // set 'logged in' state,
+        // set 'logged in' state, this will update the UI completely
         setLoggedIn(user);
         // and reset input fileds
         setForm({ email: '', password: '' });
@@ -45,10 +45,8 @@ export default function Login() {
       </InputGroup>
 
       <div className='controls'>
-        <button type='submit' className='btn'>
-          Login!
-        </button>
-        <LinkBtn to='/register' text='Register...' />
+        <Button type='submit'>Login!</Button>
+        <LinkButton to='/'>Home</LinkButton>
       </div>
     </form>
   );

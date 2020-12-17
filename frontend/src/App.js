@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { getUsers } from './actions/users';
 import './style/style.css';
 import BrandedLogo from './img/logo.png';
+import { LinkButton } from './components/Buttons/Buttons';
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
 
@@ -25,6 +26,10 @@ function App() {
         <main>
           <Switch>
             <Route exact path='/'>
+              <LinkButton to='/login'>Login</LinkButton>
+              <LinkButton to='/register'>Register</LinkButton>
+            </Route>
+            <Route exact path='/login'>
               <Login />
             </Route>
             <Route exact path='/register'>

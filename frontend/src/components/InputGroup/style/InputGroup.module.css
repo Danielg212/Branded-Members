@@ -1,0 +1,44 @@
+.Input {
+  width: 300px;
+  height: 35px;
+  padding-left: 10px;
+  background: linear-gradient(to bottom, #fafafa -42%, #161415 42%);
+  border: 1px solid #7e7e7e;
+  border-radius: 7px;
+  color: #fafafa;
+  font-size: 14px;
+  cursor: text;
+}
+
+.InputGroup {
+  position: relative;
+  margin-top: 24px;
+}
+
+.InputGroup input {
+  width: 300px;
+  height: 35px;
+  padding-left: 10px;
+  background: linear-gradient(to bottom, #fafafa -42%, #161415 42%);
+  border: 1px solid #7e7e7e;
+  border-radius: 7px;
+  color: #fafafa;
+  font-size: 14px;
+  cursor: text;
+}
+
+.InputGroup input:placeholder-shown + label {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.InputGroup label {
+  position: absolute;
+  right: 10px;
+  transform: translate(0, -1rem);
+  font-size: 12px;
+  color: #eb3756;
+  cursor: not-allowed;
+  transition: all 0.3s;
+}
+/*# sourceMappingURL=InputGroup.module.css.map */

@@ -1,0 +1,54 @@
+.MembersTable {
+  margin: 10px 0 50px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: #fafafa;
+}
+
+.MembersTable tr:hover td {
+  color: #fafafa;
+}
+
+.MembersTable tr th {
+  padding: 10px 15px;
+  border-bottom: 0.5px solid #fafafa;
+  text-align: left;
+}
+
+.MembersTable tr td {
+  padding: 5px 15px;
+  color: #7e7e7e;
+}
+
+.AgeControl {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.AgeControl span:hover {
+  text-decoration: underline;
+}
+
+.AgeControl span svg {
+  margin: 0 5px;
+  fill: #fafafa;
+}
+
+.AgeControl input {
+  width: 42px;
+  height: 30px;
+  background: linear-gradient(to bottom, #fafafa -42%, #161415 42%);
+  border: 1px solid #7e7e7e;
+  border-radius: 7px;
+  color: #fafafa;
+  font-size: 14px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .NotMobile {
+    display: none;
+  }
+}
+/*# sourceMappingURL=MembersTable.module.css.map */

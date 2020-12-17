@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUser } from '../../actions/users';
-import InputGroup from './../InputGroup';
-import LinkBtn from './../LinkBtn';
+import { InputGroup } from '../InputGroup/InputGroup';
+import { Button, LinkButton } from './../Buttons/Buttons';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -27,7 +27,7 @@ export default function Register() {
     if (verifyName(form.firstName) && verifyName(form.lastName) && verifyPassword(form.password) && verifyPasswordConfirmation(form.password, form.confirmPassword)) {
       dispatch(createUser(form)); // send form to server
       window.alert('Registered succesfully! :)'); // display success
-      history.push('/'); // then redirect
+      history.push('/login'); // then redirect
     } else {
       window.alert('one or more credentials are invalid, please submit form again.');
     }
@@ -50,15 +50,13 @@ export default function Register() {
       <InputGroup name='confirmPassword' type='password' placeholder='Confirm password:' formState={[form, setForm]}>
         {verifyPasswordConfirmation(form.confirmPassword, form.password) ? '' : 'Must match your password'}
       </InputGroup>
-      <div className='inp-group'>
+      <div className='date-group'>
         <DatePicker placeholderText='Date of Birth:' selected={form.birthDate} onChange={(date) => setForm({ ...form, birthDate: date })} />
       </div>
 
       <div className='controls'>
-        <button type='submit' className='btn'>
-          Register!
-        </button>
-        <LinkBtn to='/' text='Home' />
+        <Button type='submit'>Register!</Button>
+        <LinkButton to='/'>Home</LinkButton>
       </div>
     </form>
   );

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import SortIcon from './icons/SortIcon';
+import styles from './style/MembersTable.module.css';
+import SortIcon from './SortIcon';
 
 export default function MembersTable() {
   const usersData = useSelector((state) => state.users); // all users from global state - fetched from database
@@ -28,13 +29,13 @@ export default function MembersTable() {
   };
 
   return (
-    <table>
+    <table className={styles.MembersTable}>
       <thead>
         <tr>
           <th>First name</th>
           <th>Last name</th>
 
-          <th className='age-control'>
+          <th className={styles.AgeControl}>
             {/* This is where the user can sort the age from small to big, and from big to small */}
             <span onClick={sortByAge}>
               Age <SortIcon size='14' />
@@ -48,7 +49,7 @@ export default function MembersTable() {
             />
           </th>
 
-          <th className='not-mobile'>Email</th>
+          <th className={styles.NotMobile}>Email</th>
         </tr>
       </thead>
       <tbody>
@@ -59,7 +60,7 @@ export default function MembersTable() {
                 <td>{user.firstName}</td>
                 <td>{user.lastName}</td>
                 <td>{user.age}</td>
-                <td className='not-mobile'>{user.email}</td>
+                <td className={styles.NotMobile}>{user.email}</td>
               </tr>
             )
         )}

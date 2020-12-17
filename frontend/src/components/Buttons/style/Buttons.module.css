@@ -1,0 +1,19 @@
+.Button {
+  width: 120px;
+  margin: 10px;
+  padding: 12px 0;
+  background: linear-gradient(to bottom, #eb3756, #161415);
+  border-top: 1px solid #fafafa;
+  border-left: 1px solid #fafafa;
+  border-bottom: 1px solid #7e7e7e;
+  border-right: 1px solid #7e7e7e;
+  border-radius: 10px;
+  color: #fafafa;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.Button:hover, .Button:active {
+  font-weight: 900;
+}
+/*# sourceMappingURL=Buttons.module.css.map */
