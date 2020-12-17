@@ -18,8 +18,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### Database content (mobile):
 
-<img src='./../img/table_mobile.png' alt='database content mobile' width='300' />
+<img src='./../img/table_mobile_ui.png' alt='database content mobile' width='300' />
 
 ### Database content (dekstop):
 
-<img src='./../img/table_desktop.png' alt='database content desktop' width='500' />
+<img src='./../img/table_desktop_ui.png' alt='database content desktop' width='500' />
