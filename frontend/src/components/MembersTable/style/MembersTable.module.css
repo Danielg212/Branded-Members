@@ -1,12 +1,12 @@
 .MembersTable {
   margin: 10px 0 50px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.3);
   border-radius: 10px;
   color: #fafafa;
 }
 
 .MembersTable tr:hover td {
-  color: #fafafa;
+  color: #161415;
 }
 
 .MembersTable tr th {
@@ -17,7 +17,6 @@
 
 .MembersTable tr td {
   padding: 5px 15px;
-  color: #7e7e7e;
 }
 
 .AgeControl {

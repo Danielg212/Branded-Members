@@ -4,16 +4,22 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Preview of UI:
 
-Note that the user interface has more to offer than seen in the images.
+### Home page:
 
-### Login page:
-
-<img src='./img/login.png' alt='login page' width='500' />
+<img src='./../img/home_ui.png' alt='home page' width='300' />
 
 ### Register page:
 
-<img src='./img/register.png' alt='register page' width='500' />
+<img src='./../img/register_ui.png' alt='register page' width='300' />
 
-### Database content:
+### Login page:
 
-<img src='./img/table.png' alt='database content' width='500' />
+<img src='./../img/login_ui.png' alt='login page' width='300' />
+
+### Database content (mobile):
+
+<img src='./../img/table_mobile' alt='database content mobile' width='300' />
+
+### Database content (dekstop):
+
+<img src='./../img/table_desktop' alt='database content desktop' width='500' />
