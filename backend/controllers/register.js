@@ -18,7 +18,7 @@ export const register = async (req, res) => {
     await newUser.save();
     console.log(`✅ -CREATE- :`, newUser);
     res.status(201).json(newUser); // created
-    sendThankYouMail(newUser).catch(console.error);
+    sendThankYouMail(newUser).catch((err) => console.log(`❌ ${err}`));
   } catch (error) {
     console.log(`❌ ${error}`);
     res.status(409).json(error); // conflict
@@ -57,7 +57,7 @@ async function sendThankYouMail(form) {
     `, // html body
   });
 
-  console.log('Message sent: %s', info.messageId);
+  console.log('✅ Message sent: %s', info.messageId);
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
   // Preview only available when sending through an Ethereal account
