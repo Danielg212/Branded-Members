@@ -1,21 +1,23 @@
 import * as api from './../api/index';
 import * as type from './../constants/actionTypes';
 
-export const getUsers = () => async (dispatch) => {
+export const fetchUsers = () => async (dispatch) => {
   try {
-    const response = await api.fetchUsers();
-    console.log(`✅ ${response.status} ${response.statusText} : FETCHED USERS`);
-    dispatch({ type: type.FETCH_ALL, payload: response.data });
+    const res = await api.fetchUsers();
+
+    console.log(`✅ ${res.status} ${res.statusText} : FETCHED USERS`);
+    dispatch({ type: type.FETCH_ALL, payload: res.data });
   } catch (error) {
     console.warn(`❌ ${error}`);
   }
 };
 
-export const createUser = (form) => async (dispatch) => {
+export const register = (form) => async (dispatch) => {
   try {
-    const response = await api.addUser(form);
-    console.log(`✅ ${response.status} ${response.statusText} : UPLOADED NEW USER`);
-    dispatch({ type: type.CREATE, payload: response.data });
+    const res = await api.register(form);
+
+    console.log(`✅ ${res.status} ${res.statusText} : NEW USER`);
+    dispatch({ type: type.REGISTER, payload: res.data });
   } catch (error) {
     console.warn(`❌ ${error}`);
   }

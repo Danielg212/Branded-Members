@@ -12,7 +12,7 @@ const mongodbDeprecateFix = { useNewUrlParser: true, useUnifiedTopology: true };
 // i am using the mongodb community server
 mongoose
   .connect(process.env.URL, mongodbDeprecateFix)
-  .then(() => app.listen(process.env.PORT, () => console.log(`✅ Server is running on port: ${process.env.PORT}`)))
+  .then(() => app.listen(process.env.PORT, () => console.log(`✅ MongoDB is running on port: ${process.env.PORT}`)))
   .catch((error) => console.log(`❌ ${error}`));
 
 app.use(json()); // body parse

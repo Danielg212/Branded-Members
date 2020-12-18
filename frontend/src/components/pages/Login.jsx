@@ -1,28 +1,29 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from './../../actions/logged';
 import { InputGroup } from '../InputGroup/InputGroup';
 import { Button, LinkButton } from './../Buttons/Buttons';
-import BrandedMembers from './BrandedMembers';
 
 export default function Login() {
+  const history = useHistory();
+  const dispatch = useDispatch();
   const usersData = useSelector((state) => state.users);
   const [form, setForm] = useState({ email: '', password: '' });
-  const [loggedIn, setLoggedIn] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // if user is found by input email, then return it to 'user'
     let [user] = usersData.filter((item) => item.email === form.email && item);
+    // note: this same verification is done on the server too!
 
     // if user exists
     if (user) {
       // & password is correct,
       if (user.password === form.password) {
-        // set 'logged in' state, this will update the UI completely
-        setLoggedIn(user);
-        // and reset input fileds
-        setForm({ email: '', password: '' });
+        dispatch(login(form));
+        history.push('/members');
       } else {
         window.alert('Password is incorrect.');
       }
@@ -31,11 +32,7 @@ export default function Login() {
     }
   };
 
-  return loggedIn ? (
-    // if the user is logged in (state updated from false), then access will be granted to the following
-    <BrandedMembers loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
-  ) : (
-    // if the user is not logged in (state is false), then apply the following UI to login
+  return (
     <form onSubmit={handleSubmit}>
       <InputGroup name='email' type='email' placeholder='Email:' formState={[form, setForm]}>
         johndoe@example.com

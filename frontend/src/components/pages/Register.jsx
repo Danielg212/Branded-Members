@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createUser } from '../../actions/users';
+import { register } from '../../actions/users';
 import { InputGroup } from '../InputGroup/InputGroup';
 import { Button, LinkButton } from './../Buttons/Buttons';
 import DatePicker from 'react-datepicker';
@@ -25,7 +25,7 @@ export default function Register() {
     e.preventDefault();
     // verify inputs here (email is 'unique' on server too!)
     if (verifyName(form.firstName) && verifyName(form.lastName) && verifyPassword(form.password) && verifyPasswordConfirmation(form.password, form.confirmPassword)) {
-      dispatch(createUser(form)); // send form to server
+      dispatch(register(form)); // send form to server
       window.alert('Registered succesfully! :)'); // display success
       history.push('/login'); // then redirect
     } else {

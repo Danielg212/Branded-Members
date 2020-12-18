@@ -4,8 +4,10 @@ export const users = (state = [], action) => {
   switch (action.type) {
     case type.FETCH_ALL:
       return action.payload;
-    case type.CREATE:
+
+    case type.REGISTER:
       return [...state, action.payload];
+
     default:
       return state;
   }
