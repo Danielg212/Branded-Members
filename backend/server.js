@@ -9,7 +9,7 @@ dotenv.config();
 
 // required to fix deprecation warnings with mongoose
 const mongodbDeprecateFix = { useNewUrlParser: true, useUnifiedTopology: true };
-// i am using the mongodb community server
+// I am using the MongoDB - community server
 mongoose
   .connect(process.env.URL, mongodbDeprecateFix)
   .then(() => app.listen(process.env.PORT, () => console.log(`✅ MongoDB is running on port: ${process.env.PORT}`)))
