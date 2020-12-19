@@ -2,9 +2,7 @@ import mongoose from 'mongoose'; // MongoDB
 import express, { json } from 'express'; // Backend App
 import dotenv from 'dotenv'; // Secures content
 import cors from 'cors'; // HTTP requests
-import usersRoutes from './routes/users.js';
-import loginRoutes from './routes/login.js';
-import registerRoutes from './routes/register.js';
+import apiRoutes from './routes/api.js';
 
 const app = express();
 dotenv.config();
@@ -19,9 +17,7 @@ mongoose
 
 app.use(json()); // body parse
 app.use(cors()); // enable CORS
-app.use('/branded', usersRoutes);
-app.use('/branded', loginRoutes);
-app.use('/branded', registerRoutes);
+app.use('/branded', apiRoutes); // get & post requests
 
 // This helped me understand the http codes
 // https://restapitutorial.com/httpstatuscodes.html
