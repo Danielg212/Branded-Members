@@ -1,9 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from './../../actions/logged';
-import MembersTable from './../MembersTable/MembersTable';
+import logOut from './../../actions/logOut';
 import { Button } from './../Buttons/Buttons';
+import MembersTable from './../MembersTable/MembersTable';
 
 export default function BrandedMembers() {
   const history = useHistory();
@@ -23,7 +23,7 @@ export default function BrandedMembers() {
 
       <Button
         onClick={() => {
-          dispatch(logout());
+          dispatch(logOut());
           history.push('/');
         }}>
         {loggedState ? 'Signout!' : 'Home'}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from './../../actions/logged';
+import logIn from './../../actions/logIn';
 import { InputGroup } from '../InputGroup/InputGroup';
 import { Button, LinkButton } from './../Buttons/Buttons';
 
@@ -22,7 +22,7 @@ export default function Login() {
     if (user) {
       // & password is correct,
       if (user.password === form.password) {
-        dispatch(login(form));
+        dispatch(logIn(form));
         history.push('/members');
       } else {
         window.alert('Password is incorrect.');

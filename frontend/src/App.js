@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { fetchUsers } from './actions/users';
-import './style/style.css';
-import BrandedLogo from './img/logo.png';
+import fetchAllUsers from './actions/getUsers';
 import { LinkButton } from './components/Buttons/Buttons';
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
 import BrandedMembers from './components/pages/BrandedMembers';
+import './style/style.css';
+import BrandedLogo from './img/logo.png';
 
 function App() {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ function App() {
   useEffect(() => {
     // upon startup of application, this side effect will fetch the users from database,
     // and save them to the global state in Redux
-    dispatch(fetchUsers());
+    dispatch(fetchAllUsers());
   }, [dispatch]);
 
   return (
