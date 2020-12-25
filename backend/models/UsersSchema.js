@@ -1,22 +1,25 @@
 import mongoose from 'mongoose';
 
-const UsersSchema = mongoose.Schema({
+const instance = mongoose.Schema({
   firstName: {
     type: String,
     required: true,
+    match: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
   },
   lastName: {
     type: String,
     required: true,
+    match: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
   },
   birthDate: {
     type: Date,
-    required: true,
+    // required: true,
   },
   email: {
     type: String,
     required: true,
     unique: true,
+    match: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
   },
   password: {
     type: String,
@@ -28,4 +31,4 @@ const UsersSchema = mongoose.Schema({
   },
 });
 
-export default mongoose.model('User', UsersSchema);
+export default mongoose.model('User', instance);

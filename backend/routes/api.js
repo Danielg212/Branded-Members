@@ -1,12 +1,12 @@
 import express from 'express';
-import { fetchUsers } from '../controllers/fetchUsers.js';
 import { register } from '../controllers/register.js';
 import { login } from '../controllers/login.js';
+import { fetchUsers } from '../controllers/fetchUsers.js';
 
 const router = express.Router();
 
-router.get('/users', fetchUsers);
 router.post('/register', register);
 router.post('/login', login);
+router.get('/users', fetchUsers);
 
 export default router;
