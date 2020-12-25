@@ -1,5 +1,5 @@
 import { check } from 'express-validator';
-import User from '../models/UsersSchema.js';
+import User from '../models/User.js';
 
 export default [
   check(['firstName', 'lastName'], 'Must be a valid name!').exists().isAlpha(),

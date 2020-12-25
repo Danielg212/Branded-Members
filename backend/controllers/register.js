@@ -1,4 +1,4 @@
-import User from '../models/UsersSchema.js';
+import User from '../models/User.js';
 import { validationResult } from 'express-validator';
 import bcrypt from 'bcrypt';
 import sendThankYouMail from './../middlewares/mailer.js';
