@@ -3,7 +3,7 @@ import { validationResult } from 'express-validator';
 import bcrypt from 'bcrypt';
 import sendThankYouMail from './../middlewares/mailer.js';
 
-export const register = (req, res, next) => {
+export default (req, res, next) => {
   // validate using express-validator
   const errors = validationResult(req);
 
