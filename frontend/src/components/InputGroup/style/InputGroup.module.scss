@@ -15,6 +15,10 @@ $accent-color: #eb3756;
   cursor: text;
 }
 
+.Input {
+  @include inputStyles;
+}
+
 .InputGroup {
   position: relative;
   margin-top: 24px;
