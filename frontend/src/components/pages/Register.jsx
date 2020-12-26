@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { postUser } from './../../api';
+import { signUp } from './../../api';
 import { InputGroup } from '../InputGroup/InputGroup';
 import { Button, LinkButton } from './../Buttons/Buttons';
 import DatePicker from 'react-date-picker';
@@ -13,7 +13,7 @@ export default function Register() {
 
   const onSubmit = async (values) => {
     try {
-      await postUser({ ...values, birthDate })
+      await signUp({ ...values, birthDate })
         .then((response) => console.log(`✅ ${response.status} ${response.statusText}`, response.data))
         .then(window.alert('Registered succesfully! :)'))
         .then(history.push('/login'));

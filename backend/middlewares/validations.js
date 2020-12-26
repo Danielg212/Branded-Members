@@ -14,3 +14,8 @@ export const registerValidations = [
     .custom((value, { req }) => (value === req.body.password ? true : Promise.reject('Passwords do not match'))),
   check('birthDate').exists(),
 ];
+
+export const loginValidations = [
+  check('email', 'Email is not a valid email').exists().isEmail().normalizeEmail(),
+  check('password', 'Must be over 7 characters').exists().isLength({ min: 7 }),
+];
