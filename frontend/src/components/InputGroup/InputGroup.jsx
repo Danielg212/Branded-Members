@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './style/InputGroup.module.css';
 
-export function Input({ value, onChange, name, type, placeholder }) {
+export function Input({ formHook, value, onChange, name, type, placeholder }) {
   return (
     <input
       className={styles.Input}
@@ -9,28 +9,19 @@ export function Input({ value, onChange, name, type, placeholder }) {
       name={name}
       type={type ? type : 'text'}
       placeholder={placeholder}
-      value={value}
-      onChange={(e) => {
-        onChange(e.target.value);
-      }}
+      ref={formHook}
+      // value={value}
+      // onChange={(e) => {
+      //   onChange(e.target.value);
+      // }}
     />
   );
 }
 
-export function InputGroup({ formState, name, type, placeholder, children }) {
-  const [form, setForm] = formState;
-
+export function InputGroup({ formHook, name, type, placeholder, children }) {
   return (
     <div className={styles.InputGroup}>
-      <Input
-        name={name}
-        type={type}
-        placeholder={placeholder}
-        value={form[`${name}`]} // 'form' is an object, 'name' is a property
-        onChange={(item) => {
-          setForm({ ...form, [`${name}`]: item });
-        }}
-      />
+      <Input name={name} type={type} placeholder={placeholder} formHook={formHook} />
       <label htmlFor={name}>
         {
           /* label is given as children, so that they can be displayed according to validations happening in parent component */

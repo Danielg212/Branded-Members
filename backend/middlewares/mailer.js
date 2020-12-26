@@ -1,8 +1,15 @@
 import nodemailer from 'nodemailer';
 
-// basically I copied this function from nodemailer.com and pasted the code here,
-// I must mention that I do understand the code, and edited the parts needed.
-async function sendThankYouMail(form) {
+// This is where I got the mailer
+// https://nodemailer.com/about/
+
+// This is where I got a fake mailing account (it catches the mail, doesn't send it forward)
+// https://ethereal.email
+
+// Then I got an SMTP service from here
+// https://www.sendinblue.com/
+
+export const sendThankYouMail = async (form) => {
   // create reusable transporter object (using the default SMTP transport)
   let transporter = nodemailer.createTransport({
     host: process.env.SMTP_SERVER,
@@ -31,6 +38,4 @@ async function sendThankYouMail(form) {
 
   console.log('✅ Message sent: %s', info.messageId);
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-}
-
-export default sendThankYouMail;
+};

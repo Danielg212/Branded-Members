@@ -2,7 +2,7 @@ import mongoose from 'mongoose'; // MongoDB
 import express from 'express'; // Backend App
 import dotenv from 'dotenv'; // Secures content
 import cors from 'cors'; // HTTP requests
-import apiRoutes from './routes/api.js';
+import usersRoutes from './routes/users.js';
 
 // init app
 const app = express();
@@ -29,16 +29,4 @@ mongoose
 
 mongoose.set('useCreateIndex', true);
 
-app.use('/users', apiRoutes); // get & post requests
-
-// This helped me understand the http codes
-// https://restapitutorial.com/httpstatuscodes.html
-
-// This is where I got the mailer
-// https://nodemailer.com/about/
-
-// This is where I got a fake mailing account (it catches the mail, doesn't send it forward)
-// https://ethereal.email
-
-// Then I got an SMTP service from here
-// https://www.sendinblue.com/
+app.use('/users', usersRoutes); // get & post requests

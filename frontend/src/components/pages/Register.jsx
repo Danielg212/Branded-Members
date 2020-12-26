@@ -1,57 +1,56 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import register from '../../actions/register';
+import { useForm } from 'react-hook-form';
+import { postUser } from './../../api';
 import { InputGroup } from '../InputGroup/InputGroup';
 import { Button, LinkButton } from './../Buttons/Buttons';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from 'react-date-picker';
 
 export default function Register() {
-  const usersData = useSelector((state) => state.users); // all users from global state - fetched from database
   const history = useHistory(); // used for redirecting
-  const dispatch = useDispatch(); // dispatch an action with Redux
+  const [birthDate, setBirthDate] = React.useState(new Date());
+  const { register, handleSubmit, errors } = useForm();
 
-  const [form, setForm] = useState({
-    firstName: '',
-    lastName: '',
-    birthDate: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // verify inputs here (email is 'unique' on server too!)
-    if (verifyName(form.firstName) && verifyName(form.lastName) && verifyPassword(form.password) && verifyPasswordConfirmation(form.password, form.confirmPassword)) {
-      dispatch(register(form)); // send form to server
-      window.alert('Registered succesfully! :)'); // display success
-      history.push('/login'); // then redirect
-    } else {
-      window.alert('one or more credentials are invalid, please submit form again.');
+  const onSubmit = async (values) => {
+    try {
+      await postUser({ ...values, birthDate })
+        .then((response) => console.log(`✅ ${response.status} ${response.statusText}`, response.data))
+        .then(window.alert('Registered succesfully! :)'))
+        .then(history.push('/login'));
+    } catch (error) {
+      console.warn(`❌ ${error}`, error.errors);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <InputGroup name='firstName' placeholder='First name:' formState={[form, setForm]}>
-        {verifyName(form.firstName) ? '' : 'Must be a valid name'}
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <InputGroup name='firstName' placeholder='First name:' formHook={register({ required: true, pattern: { value: /^[a-z ,.'-]+$/i, message: 'Invalid name' } })}>
+        {errors.firstName && errors.firstName.message}
       </InputGroup>
-      <InputGroup name='lastName' placeholder='Last name:' formState={[form, setForm]}>
-        {verifyName(form.lastName) ? '' : 'Must be a valid name'}
+      <InputGroup name='lastName' placeholder='Last name:' formHook={register({ required: true, pattern: { value: /^[a-z ,.'-]+$/i, message: 'Invalid name' } })}>
+        {errors.lastName && errors.lastName.message}
       </InputGroup>
-      <InputGroup name='email' type='email' placeholder='Email:' formState={[form, setForm]}>
-        {verifyEmail(form.email, usersData) ? '' : 'That email is already used!'}
+      <InputGroup
+        name='email'
+        type='email'
+        placeholder='Email:'
+        formHook={register({
+          required: true,
+          pattern: {
+            value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            message: 'Invalid email',
+          },
+        })}>
+        {errors.email && errors.email.message}
       </InputGroup>
-      <InputGroup name='password' type='password' placeholder='Create a password:' formState={[form, setForm]}>
-        {verifyPassword(form.password) ? '' : 'At least 7 characters'}
+      <InputGroup name='password' type='password' placeholder='Create a password:' formHook={register({ required: true, minLength: { value: 7, message: 'Must be at least 7 characters' } })}>
+        {errors.password && errors.password.message}
       </InputGroup>
-      <InputGroup name='confirmPassword' type='password' placeholder='Confirm password:' formState={[form, setForm]}>
-        {verifyPasswordConfirmation(form.confirmPassword, form.password) ? '' : 'Must match your password'}
+      <InputGroup name='confirmPassword' type='password' placeholder='Confirm password:' formHook={register({ required: true, minLength: { value: 7, message: 'Must be at least 7 characters' } })}>
+        {errors.confirmPassword && errors.confirmPassword.message}
       </InputGroup>
       <div className='date-group'>
-        <DatePicker placeholderText='Date of Birth:' selected={form.birthDate} onChange={(date) => setForm({ ...form, birthDate: date })} />
+        <DatePicker name='birthDate' value={birthDate} onChange={setBirthDate} />
       </div>
 
       <div className='controls'>
@@ -61,56 +60,3 @@ export default function Register() {
     </form>
   );
 }
-
-const verifyName = (name) => {
-  let isValid = false;
-  // checks that 'name' is not empty
-  if (name !== '') {
-    isValid = true;
-    // checks that all characters are alphabetical letters (can be mixed with CAPS & nonCAPS)
-    for (let i = 0; i < name.length; i++) {
-      let char = name.charAt(i);
-      if ((char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z')) {
-        continue;
-      } else {
-        isValid = false;
-        break;
-      }
-    }
-  }
-  // returns 'true' if valid, 'false' otherwise
-  return isValid;
-};
-
-const verifyEmail = (email, users) => {
-  let isValid;
-  // checks that no one is already using that email address
-  let found = users.find((user) => user.email === email);
-  if (found) {
-    isValid = false;
-  } else {
-    isValid = true;
-  }
-  // returns 'true' if valid, 'false' otherwise
-  return isValid;
-};
-
-const verifyPassword = (pass) => {
-  let isValid = false;
-  // checks that password is over 7 characters
-  if (pass.length >= 7) {
-    isValid = true;
-  }
-  // returns 'true' if valid, 'false' otherwise
-  return isValid;
-};
-
-const verifyPasswordConfirmation = (passConfirm, passOriginal) => {
-  let isValid = false;
-  // checks that confirmed password is equal to previous typed password
-  if (passOriginal === passConfirm) {
-    isValid = true;
-  }
-  // returns 'true' if valid, 'false' otherwise
-  return isValid;
-};
