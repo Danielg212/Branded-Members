@@ -37,6 +37,7 @@ export default function Register() {
         formHook={register({
           required: true,
           pattern: {
+            // eslint-disable-next-line no-useless-escape
             value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
             message: 'Invalid email',
           },
