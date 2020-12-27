@@ -12,7 +12,7 @@ export const registerValidations = [
   check('confirmPassword')
     .exists()
     .custom((value, { req }) => (value === req.body.password ? true : Promise.reject('Passwords do not match'))),
-  // check('birthDate').exists(),
+  check('birthDate').exists(),
 ];
 
 export const loginValidations = [
