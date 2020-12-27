@@ -16,7 +16,7 @@ export default function Login() {
     try {
       let response = await signIn(values);
       setToken(response.data.token);
-      console.log(`✅ ${response.status} ${response.statusText}`);
+      console.log(`✅ ${response.status} ${response.statusText}`, response.data);
       window.alert('Logged in succesfully! :)');
       history.push('/members');
     } catch (error) {
