@@ -1,43 +1,23 @@
-import React from 'react'; // , { useState }
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-// import { useDispatch, useSelector } from 'react-redux';
 import { signIn } from './../../api';
 import { InputGroup } from '../InputGroup/InputGroup';
 import { Button, LinkButton } from './../Buttons/Buttons';
 
 export default function Login() {
   const history = useHistory();
-  // const dispatch = useDispatch();
-  // const usersData = useSelector((state) => state.users);
-  // const [form, setForm] = useState({ email: '', password: '' });
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = async (values) => {
-    // e.preventDefault();
-
-    // if user is found by input email, then return it to 'user'
-    // let [user] = usersData.filter((item) => item.email === form.email && item);
-    // note: this same verification is done on the server too!
-
-    // if user exists
-    // if (user) {
-    // & password is correct,
-    // if (user.password === form.password) {
-    // dispatch(logIn(form));
     try {
-      await signIn(values).then((response) => console.log(`✅ ${response.status} ${response.statusText}`, response.data));
-      // .then(window.alert('Logged in succesfully! :)'))
-      // .then(history.push('/members'));
+      await signIn(values)
+        .then((response) => console.log(`✅ ${response.status} ${response.statusText}`, response.data))
+        .then(window.alert('Logged in succesfully! :)'))
+        .then(history.push('/members'));
     } catch (error) {
       console.warn(`❌ ${error}`, error.errors);
     }
-    // } else {
-    // window.alert('Password is incorrect.');
-    // }
-    // } else {
-    // window.alert('Cannot find user by that email.');
-    // }
   };
 
   return (

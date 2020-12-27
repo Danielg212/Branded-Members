@@ -2,7 +2,7 @@ import mongoose from 'mongoose'; // MongoDB
 import express from 'express'; // Backend App
 import dotenv from 'dotenv'; // Secures content
 import cors from 'cors'; // HTTP requests
-import usersRoutes from './routes/users.js';
+import usersRoutes from './api/routes/users.js';
 
 // init app
 const app = express();

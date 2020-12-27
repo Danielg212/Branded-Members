@@ -24,10 +24,16 @@ export default function Register() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <InputGroup name='firstName' placeholder='First name:' formHook={register({ required: true, pattern: { value: /^[a-z ,.'-]+$/i, message: 'Invalid name' } })}>
+      <InputGroup
+        name='firstName'
+        placeholder='First name:'
+        formHook={register({ required: true, pattern: { value: /^[a-z ,.'-]+$/i, message: 'Invalid name' } })}>
         {errors.firstName && errors.firstName.message}
       </InputGroup>
-      <InputGroup name='lastName' placeholder='Last name:' formHook={register({ required: true, pattern: { value: /^[a-z ,.'-]+$/i, message: 'Invalid name' } })}>
+      <InputGroup
+        name='lastName'
+        placeholder='Last name:'
+        formHook={register({ required: true, pattern: { value: /^[a-z ,.'-]+$/i, message: 'Invalid name' } })}>
         {errors.lastName && errors.lastName.message}
       </InputGroup>
       <InputGroup
@@ -44,10 +50,18 @@ export default function Register() {
         })}>
         {errors.email && errors.email.message}
       </InputGroup>
-      <InputGroup name='password' type='password' placeholder='Create a password:' formHook={register({ required: true, minLength: { value: 7, message: 'Must be at least 7 characters' } })}>
+      <InputGroup
+        name='password'
+        type='password'
+        placeholder='Create a password:'
+        formHook={register({ required: true, minLength: { value: 7, message: 'Must be at least 7 characters' } })}>
         {errors.password && errors.password.message}
       </InputGroup>
-      <InputGroup name='confirmPassword' type='password' placeholder='Confirm password:' formHook={register({ required: true, minLength: { value: 7, message: 'Must be at least 7 characters' } })}>
+      <InputGroup
+        name='confirmPassword'
+        type='password'
+        placeholder='Confirm password:'
+        formHook={register({ required: true, minLength: { value: 7, message: 'Must be at least 7 characters' } })}>
         {errors.confirmPassword && errors.confirmPassword.message}
       </InputGroup>
       <div className='date-group'>
