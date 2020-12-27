@@ -13,12 +13,12 @@ export default function Register() {
 
   const onSubmit = async (values) => {
     try {
-      await signUp({ ...values, birthDate })
-        .then((response) => console.log(`✅ ${response.status} ${response.statusText}`, response.data))
-        .then(window.alert('Registered succesfully! :)'))
-        .then(history.push('/login'));
+      let response = await signUp({ ...values, birthDate });
+      console.log(`✅ ${response.status} ${response.statusText}`);
+      window.alert('Registered succesfully! :)');
+      history.push('/login');
     } catch (error) {
-      console.warn(`❌ ${error}`, error.errors);
+      console.warn(`❌ ${error}`);
     }
   };
 

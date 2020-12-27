@@ -1,4 +1,5 @@
 import React from 'react';
+import { TokenContext } from './../../ContextAPI';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { signIn } from './../../api';
@@ -6,17 +7,19 @@ import { InputGroup } from '../InputGroup/InputGroup';
 import { Button, LinkButton } from './../Buttons/Buttons';
 
 export default function Login() {
-  const history = useHistory();
+  const [token, setToken] = React.useContext(TokenContext);
   const { register, handleSubmit, errors } = useForm();
+  const history = useHistory();
 
   const onSubmit = async (values) => {
     try {
-      await signIn(values)
-        .then((response) => console.log(`✅ ${response.status} ${response.statusText}`, response.data))
-        .then(window.alert('Logged in succesfully! :)'))
-        .then(history.push('/members'));
+      let response = await signIn(values);
+      setToken(response.data.token);
+      console.log(`✅ ${response.status} ${response.statusText}`);
+      window.alert('Logged in succesfully! :)');
+      history.push('/members');
     } catch (error) {
-      console.warn(`❌ ${error}`, error.errors);
+      console.warn(`❌ ${error}`);
     }
   };
 

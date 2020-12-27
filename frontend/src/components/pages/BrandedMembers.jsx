@@ -1,18 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { TokenContext } from './../../ContextAPI';
 import { useHistory } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import logOut from './../../actions/logOut';
+import { getUsers } from './../../api';
 import { Button } from './../Buttons/Buttons';
 import MembersTable from './../MembersTable/MembersTable';
 
 export default function BrandedMembers() {
+  const [token] = React.useContext(TokenContext);
+  const [allUsers, setAllUsers] = useState([]);
   const history = useHistory();
-  const dispatch = useDispatch();
-  const loggedState = useSelector((state) => state.logged);
+
+  useEffect(() => {
+    const getAllUsers = async () => {
+      try {
+        let response = await getUsers(token);
+        console.log(`✅ ${response.status} ${response.statusText}`, response.data);
+        setAllUsers(response.data);
+      } catch (error) {
+        console.warn(`❌ ${error}`);
+      }
+    };
+
+    getAllUsers();
+  }, [token]);
 
   return (
     <>
-      {loggedState ? (
+      {/* {loggedState ? (
         <>
           <h2>Welcome {loggedState.firstName}!</h2>
           <MembersTable />
@@ -27,7 +41,7 @@ export default function BrandedMembers() {
           history.push('/');
         }}>
         {loggedState ? 'Signout!' : 'Home'}
-      </Button>
+      </Button> */}
     </>
   );
 }
