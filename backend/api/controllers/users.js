@@ -59,8 +59,9 @@ export const login = async (req, res, next) => {
 // ----------
 // GET ALL USERS
 // ----------
-export const getUsers = (req, res, next) => {
-  User.find()
-    .then((data) => res.status(200).json(data))
+export const getUsers = async (req, res, next) => {
+  let foundUsers = await User.find()
+    .select('firstName lastName birthDate email')
     .catch((err) => console.log(err) + res.status(500).send());
+  res.status(200).json(foundUsers);
 };
