@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import styles from './style/MembersTable.module.css';
 import SortIcon from './SortIcon';
 
-export default function MembersTable() {
-  const usersData = useSelector((state) => state.users); // all users from global state - fetched from database
-  // allUsers is an array of objects, each object is a user object from database, added an age property to said object
+export default function MembersTable({ usersData }) {
+  const calculateAge = (birthDate) => {
+    birthDate = new Date(birthDate);
+    let nowDate = new Date();
+    let difference = nowDate - birthDate;
+    let age = Math.floor(difference / 31557600000); // approx. 31557600000 ms in 1 year (to be exact -> 1.00068493151 year)
+    return age;
+  };
+
   const [allUsers, setAllUsers] = useState(usersData.map((user) => ({ ...user, age: calculateAge(user.birthDate) })));
   const [sortByDirection, setSortByDirection] = useState(true);
   const [filterAge, setFilterAge] = useState(0);
@@ -68,18 +73,3 @@ export default function MembersTable() {
     </table>
   );
 }
-
-const calculateAge = (birthDate) => {
-  // let birthDateInMilliseconds = Date.parse(birthDate); // milliseconds between January 1 1970, and birth date
-  // let nowDateInMilliseconds = Date.parse(new Date()); // // milliseconds between January 1 1970, and now date
-  // let secondsInAYear = 3.154e10; // google formula for approximate result, the amount of seconds in a year
-  // let age = (nowDateInMilliseconds - birthDateInMilliseconds) / secondsInAYear; // calculate the age
-  // return parseInt(age);
-  // ^ ^ ^ I decided to deprecate this function due to it being innacurate
-
-  birthDate = new Date(birthDate);
-  let nowDate = new Date();
-  let difference = nowDate - birthDate;
-  let age = Math.floor(difference / 31557600000); // approx. 31557600000 ms in 1 year (to be exact -> 1.00068493151 year)
-  return age;
-};

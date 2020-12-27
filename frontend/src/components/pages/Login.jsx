@@ -7,6 +7,7 @@ import { InputGroup } from '../InputGroup/InputGroup';
 import { Button, LinkButton } from './../Buttons/Buttons';
 
 export default function Login() {
+  // eslint-disable-next-line
   const [token, setToken] = React.useContext(TokenContext);
   const { register, handleSubmit, errors } = useForm();
   const history = useHistory();

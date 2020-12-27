@@ -26,10 +26,9 @@ export default function BrandedMembers() {
 
   return (
     <>
-      {/* {loggedState ? (
+      {allUsers.length ? (
         <>
-          <h2>Welcome {loggedState.firstName}!</h2>
-          <MembersTable />
+          <MembersTable usersData={allUsers} />
         </>
       ) : (
         <h2>You must be logged in to view this page!</h2>
@@ -37,11 +36,10 @@ export default function BrandedMembers() {
 
       <Button
         onClick={() => {
-          dispatch(logOut());
           history.push('/');
         }}>
-        {loggedState ? 'Signout!' : 'Home'}
-      </Button> */}
+        {allUsers.length ? 'Signout!' : 'Home'}
+      </Button>
     </>
   );
 }
