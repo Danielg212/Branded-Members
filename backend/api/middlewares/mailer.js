@@ -9,15 +9,19 @@ import nodemailer from 'nodemailer';
 // Then I got an SMTP service from here
 // https://www.sendinblue.com/
 
-export const sendThankYouMail = async (form) => {
+export const sendMail = async (form) => {
+  // Generate test SMTP service account from ethereal.email
+  // Only needed if you don't have a real mail account for testing
+  let testAccount = await nodemailer.createTestAccount();
+
   // create reusable transporter object (using the default SMTP transport)
   let transporter = nodemailer.createTransport({
-    host: process.env.SMTP_SERVER,
-    port: process.env.SMTP_PORT,
+    host: process.env.SMTP_SERVER || 'smtp.ethereal.email',
+    port: process.env.SMTP_PORT || 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
+      user: process.env.SMTP_USER || testAccount.user,
+      pass: process.env.SMTP_PASS || testAccount.pass,
     },
   });
 
@@ -38,4 +42,8 @@ export const sendThankYouMail = async (form) => {
 
   console.log('✅ Message sent: %s', info.messageId);
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+  // Preview only available when sending through an Ethereal account
+  console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 };

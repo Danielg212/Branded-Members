@@ -2,13 +2,13 @@ import jwt from 'jsonwebtoken';
 // https://github.com/auth0/node-jsonwebtoken
 // https://www.allkeysgenerator.com/Random/Security-Encryption-Key-Generator.aspx
 
-export const genToken = (data) => {
+export const generateToken = (data) => {
   return jwt.sign(data, new Buffer.from(process.env.JWT_KEY, 'base64'), {
     expiresIn: '1h',
   });
 };
 
-export const checkAuth = (req, res, next) => {
+export const authenticateToken = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(' ')[1];
     const decoded = jwt.verify(token, new Buffer.from(process.env.JWT_KEY, 'base64'));
