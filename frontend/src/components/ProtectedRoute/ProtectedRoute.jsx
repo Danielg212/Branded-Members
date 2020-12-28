@@ -1,26 +1,26 @@
 import React from 'react';
-import { Route, useHistory } from 'react-router-dom';
-import { Button } from './../Buttons/Buttons';
+import { useSelector } from 'react-redux';
+import { Route } from 'react-router-dom';
+import { LinkButton } from './../Buttons/Buttons';
 
-function ProtectedRoute({ isAuth, Component, ...rest }) {
-  const history = useHistory();
+function ProtectedRoute({ Component, ...rest }) {
+  const authToken = useSelector((state) => state.authToken);
 
   return (
     <Route
       {...rest}
+      // return a Route
+      // which conditionally renders on of the following
       render={(props) => {
-        if (isAuth) {
+        if (authToken) {
+          // if authenticate token exists, return component (which would then send a reguest to the server with that token)
           return <Component />;
         } else {
+          // if authenticate token does not exist, return an "error" user interface
           return (
             <>
               <h2>You must be logged in to view this page!</h2>
-              <Button
-                onClick={() => {
-                  history.push('/');
-                }}>
-                Home
-              </Button>
+              <LinkButton to='/'>Home</LinkButton>
             </>
           );
         }
