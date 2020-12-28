@@ -1,39 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { TokenContext } from '../../ContextAPI';
-import { getUsers } from '../../api';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { getUsers, signOut } from './../../redux/actions';
+import { Button, LinkButton } from '../Buttons/Buttons';
 import SortIcon from '../SortIcon';
 import styles from './style/BrandedMembers.module.css';
 
 export default function BrandedMembers() {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
   // ----------
   // USERS FROM DB
   // ----------
-  const [token] = React.useContext(TokenContext);
-  console.log(atob(token.split('.')[1]));
-  const [allUsers, setAllUsers] = useState([]);
+  const authToken = useSelector((state) => state.authToken);
+  const allUsers = useSelector((state) => state.allUsers);
+  const [allUsersWithCalculatedAge, setAllUsersWithCalculatedAge] = useState([]);
+
+  // console.log(atob(authToken.split('.')[1]));
 
   useEffect(() => {
-    const calculateAge = (birthDate) => {
-      birthDate = new Date(birthDate);
-      const nowDate = new Date();
-      const difference = nowDate - birthDate;
-      const age = Math.floor(difference / 31557600000); // approx. 31557600000 ms in 1 year (to be exact -> 1.00068493151 year)
-      return age;
-    };
+    dispatch(getUsers(authToken));
+  }, [authToken, dispatch]);
 
-    const getAllUsers = async () => {
-      try {
-        const response = await getUsers(token);
-        console.log(`✅ ${response.status} ${response.statusText}`, response.data);
-        const allUsersWithCalculatedAge = response.data.map((user) => ({ ...user, age: calculateAge(user.birthDate) }));
-        setAllUsers(allUsersWithCalculatedAge);
-      } catch (error) {
-        console.warn(`❌ ${error}`);
-      }
-    };
-
-    getAllUsers();
-  }, [token]);
+  useEffect(() => {
+    const newUsers = allUsers.map((user) => ({ ...user, age: calculateAge(user.birthDate) }));
+    setAllUsersWithCalculatedAge(newUsers);
+  }, [allUsers]);
 
   // ----------
   // AGE FUNCTIONS
@@ -41,20 +34,24 @@ export default function BrandedMembers() {
   const [sortByDirection, setSortByDirection] = useState(true);
   const [filterAge, setFilterAge] = useState(0);
 
-  // sort all users by their age
+  const calculateAge = (birthDate) => {
+    birthDate = new Date(birthDate);
+    const nowDate = new Date();
+    const difference = nowDate - birthDate;
+    const age = Math.floor(difference / 31557600000); // approx. 31557600000 ms in 1 year (to be exact -> 1.00068493151 year)
+    return age;
+  };
+
   const sortByAge = () => {
     let copyOfAllUsers = [...allUsers];
     copyOfAllUsers.sort((a, b) => {
       if (sortByDirection) {
-        // if direction is true, sort from small to big
-        return a.age > b.age && 1;
+        return a.age > b.age && 1; // if direction is true, sort from small to big
       } else {
-        // if direction is false, sort from big to small
-        return a.age < b.age && 1;
+        return a.age < b.age && 1; // if direction is false, sort from big to small
       }
     });
-
-    setAllUsers(copyOfAllUsers); // save changes to state
+    setAllUsersWithCalculatedAge(copyOfAllUsers); // save changes to state
     setSortByDirection(!sortByDirection); // change sorting direction for the next click
   };
 
@@ -86,7 +83,7 @@ export default function BrandedMembers() {
           </tr>
         </thead>
         <tbody>
-          {allUsers.map(
+          {allUsersWithCalculatedAge.map(
             (user) =>
               Number(user.age) >= Number(filterAge) && (
                 <tr key={user._id}>
@@ -99,6 +96,17 @@ export default function BrandedMembers() {
           )}
         </tbody>
       </table>
+
+      <div className='controls'>
+        <Button
+          onClick={() => {
+            dispatch(signOut());
+            history.push('/');
+          }}>
+          Signout!
+        </Button>
+        <LinkButton to='/'>Home</LinkButton>
+      </div>
     </>
   );
 }

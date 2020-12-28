@@ -1,27 +1,24 @@
-import React from 'react';
-import { TokenContext } from '../../ContextAPI';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { signIn } from '../../api';
+import { signIn } from './../../redux/actions';
 import { InputGroup } from '../InputGroup/InputGroup';
 import { Button, LinkButton } from '../Buttons/Buttons';
 
 export default function Login() {
-  // eslint-disable-next-line
-  const [token, setToken] = React.useContext(TokenContext);
-  const { register, handleSubmit, errors } = useForm();
+  const dispatch = useDispatch();
   const history = useHistory();
 
-  const onSubmit = async (values) => {
-    try {
-      let response = await signIn(values);
-      setToken(response.data.token);
-      console.log(`✅ ${response.status} ${response.statusText}`, response.data);
-      window.alert('Logged in succesfully! :)');
-      history.push('/members');
-    } catch (error) {
-      console.warn(`❌ ${error}`);
-    }
+  const authToken = useSelector((state) => state.authToken);
+  const { register, handleSubmit, errors } = useForm();
+
+  useEffect(() => {
+    if (authToken) history.push('/members');
+  }, [authToken, history]);
+
+  const onSubmit = (values) => {
+    dispatch(signIn(values));
   };
 
   return (
