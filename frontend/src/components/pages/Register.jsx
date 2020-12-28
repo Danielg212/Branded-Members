@@ -1,25 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { signUp } from '../../api';
+import DatePicker from 'react-date-picker';
+import { signUp } from './../../redux/actions';
 import { InputGroup } from '../InputGroup/InputGroup';
 import { Button, LinkButton } from '../Buttons/Buttons';
-import DatePicker from 'react-date-picker';
 
 export default function Register() {
-  const history = useHistory(); // used for redirecting
-  const [birthDate, setBirthDate] = React.useState(new Date());
-  const { register, handleSubmit, errors } = useForm();
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-  const onSubmit = async (values) => {
-    try {
-      let response = await signUp({ ...values, birthDate });
-      console.log(`✅ ${response.status} ${response.statusText}`);
-      window.alert('Registered succesfully! :)');
-      history.push('/login');
-    } catch (error) {
-      console.warn(`❌ ${error}`);
-    }
+  const registeredEmail = useSelector((state) => state.registeredEmail);
+  const { register, handleSubmit, errors } = useForm();
+  const [birthDate, setBirthDate] = React.useState(new Date());
+
+  useEffect(() => {
+    if (registeredEmail) history.push('/login');
+  }, [registeredEmail, history]);
+
+  const onSubmit = (values) => {
+    dispatch(signUp({ ...values, birthDate }));
   };
 
   return (

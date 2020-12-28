@@ -11,7 +11,12 @@ export default function Login() {
   const history = useHistory();
 
   const authToken = useSelector((state) => state.authToken);
-  const { register, handleSubmit, errors } = useForm();
+  const registeredEmail = useSelector((state) => state.registeredEmail);
+  const { register, handleSubmit, errors } = useForm({
+    defaultValues: {
+      email: registeredEmail,
+    },
+  });
 
   useEffect(() => {
     if (authToken) history.push('/members');

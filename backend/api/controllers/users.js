@@ -31,7 +31,7 @@ export const register = async (req, res, next) => {
   // save new user to collection
   const savedUser = await newUser.save().catch((err) => console.log(err) + res.status(500).send());
 
-  res.status(201).send();
+  res.status(201).json({ email: savedUser.email });
   sendMail(savedUser).catch((err) => console.log(err) + res.status(500).send()); // and send email to newly registered user
 };
 

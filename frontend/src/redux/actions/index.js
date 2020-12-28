@@ -1,6 +1,20 @@
 import * as constants from './../constants';
 import * as api from './../../api';
 
+export const signUp = (form) => async (dispatch) => {
+  try {
+    const response = await api.signUp(form);
+    const email = response.data.email;
+    dispatch({ type: constants.SIGN_UP, payload: email });
+
+    console.log(`✅ ${response.status} ${response.statusText}`, response.data);
+    window.alert('Succesfully signed-up! :)');
+  } catch (error) {
+    console.warn(`❌ ${error}`);
+    window.alert('Failed to signed-up! :(');
+  }
+};
+
 export const signIn = (form) => async (dispatch) => {
   try {
     const response = await api.signIn(form);
