@@ -1,10 +1,10 @@
 import React from 'react';
-import { TokenContext } from './../../ContextAPI';
+import { TokenContext } from '../../ContextAPI';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { signIn } from './../../api';
+import { signIn } from '../../api';
 import { InputGroup } from '../InputGroup/InputGroup';
-import { Button, LinkButton } from './../Buttons/Buttons';
+import { Button, LinkButton } from '../Buttons/Buttons';
 
 export default function Login() {
   // eslint-disable-next-line

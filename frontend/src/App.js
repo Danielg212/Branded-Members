@@ -1,13 +1,17 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { TokenContext } from './ContextAPI';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import { LinkButton } from './components/Buttons/Buttons';
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
-import BrandedMembers from './components/pages/BrandedMembers';
+import BrandedMembers from './components/BrandedMembers/BrandedMembers';
 import './style/style.css';
 import BrandedLogo from './img/logo.png';
 
 function App() {
+  const [token] = React.useContext(TokenContext);
+
   return (
     <Router>
       <div className='BRANDED-MEMBERS'>
@@ -17,6 +21,7 @@ function App() {
         <main>
           <Switch>
             <Route exact path='/'>
+              <LinkButton to='/members'>Members</LinkButton>
               <LinkButton to='/login'>Login</LinkButton>
               <LinkButton to='/register'>Register</LinkButton>
             </Route>
@@ -26,9 +31,7 @@ function App() {
             <Route exact path='/register'>
               <Register />
             </Route>
-            <Route exact path='/members'>
-              <BrandedMembers />
-            </Route>
+            <ProtectedRoute path='/members' Component={BrandedMembers} isAuth={token} />
           </Switch>
         </main>
       </div>

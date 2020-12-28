@@ -1,9 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { signUp } from './../../api';
+import { signUp } from '../../api';
 import { InputGroup } from '../InputGroup/InputGroup';
-import { Button, LinkButton } from './../Buttons/Buttons';
+import { Button, LinkButton } from '../Buttons/Buttons';
 import DatePicker from 'react-date-picker';
 
 export default function Register() {
