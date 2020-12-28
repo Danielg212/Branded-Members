@@ -2,25 +2,26 @@ import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import DatePicker from 'react-date-picker';
 import { signUp } from '../../redux/actions';
 import { InputGroup } from '../InputGroup/InputGroup';
 import { Button, LinkButton } from '../Buttons/Buttons';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default function SignUp() {
   const dispatch = useDispatch();
   const history = useHistory();
 
   const registeredEmail = useSelector((state) => state.registeredEmail);
-  const [birthDate, setBirthDate] = React.useState(new Date());
-  const { register, handleSubmit, errors, watch } = useForm();
+  const [birthDate, setBirthDate] = React.useState('');
+  const { register, handleSubmit, errors, watch } = useForm({});
   const password = useRef({}); // used so I can compare the password and confirmed password
   password.current = watch('password', '');
 
   // once the response came back from the server,
   // this useEffect will recognise the change in Redux and redirect the user automatically
   useEffect(() => {
-    if (registeredEmail) history.push('/login');
+    if (registeredEmail) history.push('/signin');
   }, [registeredEmail, history]);
 
   const onSubmit = (values) => {
@@ -82,7 +83,11 @@ export default function SignUp() {
         {errors.confirmPassword && errors.confirmPassword.message}
       </InputGroup>
       <div className='date-group'>
-        <DatePicker name='birthDate' value={birthDate} onChange={setBirthDate} />
+        <DatePicker
+          placeholderText='Birth date:'
+          selected={birthDate}
+          onChange={(date) => setBirthDate(date)}
+        />
       </div>
 
       <div className='controls'>
