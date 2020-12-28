@@ -8,10 +8,10 @@ export const signUp = (form) => async (dispatch) => {
     dispatch({ type: constants.SIGN_UP, payload: email });
 
     console.log(`✅ ${response.status} ${response.statusText}`, response.data);
-    window.alert('Succesfully signed-up! :)');
+    alert('Succesfully signed-up! :)');
   } catch (error) {
     console.warn(`❌ ${error}`);
-    window.alert('Failed to signed-up! :(');
+    alert('Failed to sign-up! ' + error.response.data.message);
   }
 };
 
@@ -22,10 +22,10 @@ export const signIn = (form) => async (dispatch) => {
     dispatch({ type: constants.SIGN_IN, payload: token });
 
     console.log(`✅ ${response.status} ${response.statusText}`, response.data);
-    window.alert('Succesfully signed-in! :)');
+    alert('Succesfully signed-in! :)');
   } catch (error) {
     console.warn(`❌ ${error}`);
-    window.alert('Failed to signed-in! :(');
+    alert('Failed to sign-in! ' + error.response.data.message);
   }
 };
 
@@ -42,5 +42,6 @@ export const getUsers = (token) => async (dispatch) => {
     console.log(`✅ ${response.status} ${response.statusText}`, response.data);
   } catch (error) {
     console.warn(`❌ ${error}`);
+    alert(error.response.data.message);
   }
 };

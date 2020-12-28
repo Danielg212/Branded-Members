@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Route } from 'react-router-dom';
-import { LinkButton } from './../Buttons/Buttons';
+import { LinkButton } from './Buttons/Buttons';
 
 function ProtectedRoute({ Component, ...rest }) {
   const authToken = useSelector((state) => state.authToken);

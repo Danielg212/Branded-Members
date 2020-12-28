@@ -1,8 +1,14 @@
 import mongoose from 'mongoose';
 
 const instance = mongoose.Schema({
-  firstName: String,
-  lastName: String,
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
   email: {
     type: String,
     required: true,
@@ -12,7 +18,10 @@ const instance = mongoose.Schema({
     type: String,
     required: true,
   },
-  birthDate: Date,
+  birthDate: {
+    type: Date,
+    required: true,
+  },
   creationDate: {
     type: Date,
     default: new Date(),

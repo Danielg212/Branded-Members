@@ -17,6 +17,6 @@ export const authenticateToken = (req, res, next) => {
     req.user = decoded;
     next();
   } catch (error) {
-    return res.status(401).json({ message: 'auth failed' });
+    return res.status(403).json({ message: 'Authentication failed, access denied' });
   }
 };

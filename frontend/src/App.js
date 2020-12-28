@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import ProtectedRoute from './components/ProtectedRoute';
 import { LinkButton } from './components/Buttons/Buttons';
-import Login from './components/pages/Login';
-import Register from './components/pages/Register';
-import BrandedMembers from './components/BrandedMembers/BrandedMembers';
-import './style/style.css';
+import SignIn from './components/pages/SignIn';
+import SignUp from './components/pages/SignUp';
+import BrandedMembers from './components/pages/BrandedMembers/BrandedMembers';
 import BrandedLogo from './img/logo.png';
+import './style/style.css';
 
 function App() {
   return (
@@ -19,14 +19,14 @@ function App() {
           <Switch>
             <Route exact path='/'>
               <LinkButton to='/members'>Members</LinkButton>
-              <LinkButton to='/login'>Login</LinkButton>
-              <LinkButton to='/register'>Register</LinkButton>
+              <LinkButton to='/signin'>Sign-in</LinkButton>
+              <LinkButton to='/signup'>Sign-up</LinkButton>
             </Route>
-            <Route exact path='/login'>
-              <Login />
+            <Route exact path='/signin'>
+              <SignIn />
             </Route>
-            <Route exact path='/register'>
-              <Register />
+            <Route exact path='/signup'>
+              <SignUp />
             </Route>
             <ProtectedRoute exact path='/members' Component={BrandedMembers} />
           </Switch>

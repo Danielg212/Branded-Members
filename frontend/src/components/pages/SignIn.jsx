@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { signIn } from './../../redux/actions';
+import { signIn } from '../../redux/actions';
 import { InputGroup } from '../InputGroup/InputGroup';
 import { Button, LinkButton } from '../Buttons/Buttons';
 
-export default function Login() {
+export default function SignIn() {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -18,6 +18,8 @@ export default function Login() {
     },
   });
 
+  // once the response came back from the server,
+  // this useEffect will recognise the change in Redux and redirect the user automatically
   useEffect(() => {
     if (authToken) history.push('/members');
   }, [authToken, history]);
@@ -46,12 +48,15 @@ export default function Login() {
         name='password'
         type='password'
         placeholder='Password:'
-        formHook={register({ required: true, minLength: { value: 7, message: 'Must be at least 7 characters' } })}>
+        formHook={register({
+          required: true,
+          minLength: { value: 7, message: 'Must be at least 7 characters' },
+        })}>
         {errors.password && errors.password.message}
       </InputGroup>
 
       <div className='controls'>
-        <Button type='submit'>Login!</Button>
+        <Button type='submit'>Sign-in</Button>
         <LinkButton to='/'>Home</LinkButton>
       </div>
     </form>

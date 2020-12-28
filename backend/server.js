@@ -22,11 +22,15 @@ const DEPRECATED_FIX = { useNewUrlParser: true, useUnifiedTopology: true }; // c
 // connect to db
 // mongoose connections   --->   https://mongoosejs.com/docs/connections.html
 mongoose
-  .connect(CONNECTION_URL, DEPRECATED_FIX) // just connect to db
-  .then(() => console.log('✅ MongoDB connected')) // similiar to - mongoose.connection.on('open')
-  .then(() => app.listen(PORT, () => console.log(`✅ Server listening on port: ${PORT}`))) // server is listening for requests
-  .catch((error) => console.log(`❌ MongoDB: ${error}`)); // similiar to - mongoose.connection.on('error')
-
+  .connect(CONNECTION_URL, DEPRECATED_FIX)
+  .catch((error) => console.log('❌ MongoDB:', error)); // listen for errors on initial connection
+mongoose.connection.on('connected', () => console.log('✅ MongoDB connected'));
+mongoose.connection.on('error', (error) => console.log('❌ MongoDB:', error)); // listen for errors after the connection is established (errors during the session)
+mongoose.connection.on('disconnected', () => console.log('❌ MongoDB disconnected'));
 mongoose.set('useCreateIndex', true);
+// ^ ^ ^ uncomment this if you use the "unique: true" property in a Schema
 
-app.use('/users', usersRoutes); // get & post requests
+app.use('/api/v1/users', usersRoutes); // get & post requests
+
+// server is listening for requests
+app.listen(PORT, () => console.log(`✅ Server is listening on port: ${PORT}`));

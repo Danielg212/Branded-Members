@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { getUsers, signOut } from './../../redux/actions';
-import { Button, LinkButton } from '../Buttons/Buttons';
-import SortIcon from '../SortIcon';
+import { getUsers, signOut } from '../../../redux/actions';
+import { Button, LinkButton } from '../../Buttons/Buttons';
+import SortIcon from '../../SortIcon';
 import styles from './style/BrandedMembers.module.css';
 
 export default function BrandedMembers() {
@@ -19,12 +19,17 @@ export default function BrandedMembers() {
 
   // console.log(atob(authToken.split('.')[1]));
 
+  // this useEffect send a request to get all users,
+  // the auhtentication token is used and attached in headers with axios
   useEffect(() => {
     dispatch(getUsers(authToken));
   }, [authToken, dispatch]);
 
   useEffect(() => {
-    const newUsers = allUsers.map((user) => ({ ...user, age: calculateAge(user.birthDate) }));
+    const newUsers = allUsers.map((user) => ({
+      ...user,
+      age: calculateAge(user.birthDate),
+    }));
     setAllUsersWithCalculatedAge(newUsers);
   }, [allUsers]);
 
@@ -34,6 +39,7 @@ export default function BrandedMembers() {
   const [sortByDirection, setSortByDirection] = useState(true);
   const [filterAge, setFilterAge] = useState(0);
 
+  // calculate the age from the birthdate
   const calculateAge = (birthDate) => {
     birthDate = new Date(birthDate);
     const nowDate = new Date();
@@ -42,8 +48,9 @@ export default function BrandedMembers() {
     return age;
   };
 
+  // sort table by age
   const sortByAge = () => {
-    let copyOfAllUsers = [...allUsers];
+    let copyOfAllUsers = [...allUsersWithCalculatedAge];
     copyOfAllUsers.sort((a, b) => {
       if (sortByDirection) {
         return a.age > b.age && 1; // if direction is true, sort from small to big
@@ -92,7 +99,7 @@ export default function BrandedMembers() {
                   <td>{user.age}</td>
                   <td className={styles.NotMobile}>{user.email}</td>
                 </tr>
-              )
+              ),
           )}
         </tbody>
       </table>
@@ -103,7 +110,7 @@ export default function BrandedMembers() {
             dispatch(signOut());
             history.push('/');
           }}>
-          Signout!
+          Sign-out
         </Button>
         <LinkButton to='/'>Home</LinkButton>
       </div>
