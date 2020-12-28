@@ -58,9 +58,8 @@ export const signIn = async (req, res, next) => {
     if (!foundUser) return res.status(401).json({ message: 'Wrong credentials' }); // if none found
 
     // decrypt password and compare
-    const result = await bcrypt.compare(req.body.password, foundUser.password);
-    console.log(result);
-    if (!result) return res.status(401).json({ message: 'Wrong credentials' }); // if password is not ok
+    const isPasswordOk = await bcrypt.compare(req.body.password, foundUser.password);
+    if (!isPasswordOk) return res.status(401).json({ message: 'Wrong credentials' }); // if password is not ok
 
     // generate token and send to client
     const token = generateToken({ userId: foundUser._id });
