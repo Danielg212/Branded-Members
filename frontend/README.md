@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Preview of UI:
 
-### Home page:
+### Home page (unauthorized):
 
 <br />
 <img src='./../img/UI/home-false-desktop.png' alt='home unauthorized mobile' width='300' />
@@ -22,7 +22,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 <img src='./../img/UI/login-mobile.png' alt='login mobile' width='300' />
 <img src='./../img/UI/login-desktop.png' alt='login desktop' width='500' />
 
-### Database content:
+### Home page (authorized):
 
 <br />
 <img src='./../img/UI/home-true-desktop.png' alt='home authorized mobile' width='300' />
