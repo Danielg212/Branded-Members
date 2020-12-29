@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux';
-import { authToken } from './authToken';
+import { loggedUser } from './loggedUser';
 import { allUsers } from './allUsers';
-import { registeredEmail } from './registeredEmail';
 
 export default combineReducers({
-  authToken,
+  loggedUser,
   allUsers,
-  registeredEmail,
 });

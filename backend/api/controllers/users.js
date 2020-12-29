@@ -10,7 +10,7 @@ import { sendMail } from './../middlewares/mailer.js';
 // ----------
 // REGISTER
 // ----------
-export const signUp = async (req, res, next) => {
+export const register = async (req, res, next) => {
   try {
     // validate inputs using express-validator
     const validationErrors = validationResult(req);
@@ -23,7 +23,7 @@ export const signUp = async (req, res, next) => {
 
     // encrypt password
     const salt = await bcrypt.genSalt(10);
-    const encryptedPassword = await bcrypt.hash(req.body.password, salt);
+    const encryptedPassword = await bcrypt.hash(req.body.password, await bcrypt.genSalt(10));
 
     // create new user
     const newUser = new User({
@@ -47,7 +47,7 @@ export const signUp = async (req, res, next) => {
 // ----------
 // LOGIN
 // ----------
-export const signIn = async (req, res, next) => {
+export const login = async (req, res, next) => {
   try {
     // validate inputs using express-validator
     const validationErrors = validationResult(req);
@@ -63,7 +63,7 @@ export const signIn = async (req, res, next) => {
 
     // generate token and send to client
     const token = generateToken({ userId: foundUser._id });
-    res.status(200).json({ token });
+    res.status(200).json({ token, user: { firstName: foundUser.firstName } });
   } catch (error) {
     console.log(error);
     res.status(500).send();
@@ -75,7 +75,7 @@ export const signIn = async (req, res, next) => {
 // ----------
 export const getUsers = async (req, res, next) => {
   try {
-    let foundUsers = await User.find().select('firstName lastName birthDate email');
+    let foundUsers = await User.find().select('email firstName lastName birthDate');
 
     res.status(200).json(foundUsers);
   } catch (error) {

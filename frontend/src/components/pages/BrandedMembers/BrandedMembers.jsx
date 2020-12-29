@@ -1,30 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { getUsers, signOut } from '../../../redux/actions';
-import { Button, LinkButton } from '../../Buttons/Buttons';
-import SortIcon from '../../SortIcon';
+import { getUsers } from './../../../redux/actions';
+import SortIcon from './../../SortIcon';
 import styles from './style/BrandedMembers.module.css';
 
 export default function BrandedMembers() {
-  const history = useHistory();
   const dispatch = useDispatch();
 
   // ----------
-  // USERS FROM DB
+  // USERS
   // ----------
-  const authToken = useSelector((state) => state.authToken);
+  const loggedUser = useSelector((state) => state.loggedUser);
   const allUsers = useSelector((state) => state.allUsers);
   const [allUsersWithCalculatedAge, setAllUsersWithCalculatedAge] = useState([]);
-
-  // console.log(atob(authToken.split('.')[1]));
+  // console.log(atob(loggedUser.token.split('.')[1]));
 
   // this useEffect send a request to get all users,
   // the auhtentication token is used and attached in headers with axios
   useEffect(() => {
-    dispatch(getUsers(authToken));
-  }, [authToken, dispatch]);
+    dispatch(getUsers(loggedUser.token));
+  }, [dispatch, loggedUser.token]);
 
+  // this useEffect waits for all user from db,
+  // then calculates all of their ages and sets state with the new values
   useEffect(() => {
     const newUsers = allUsers.map((user) => ({
       ...user,
@@ -63,15 +61,14 @@ export default function BrandedMembers() {
   };
 
   return (
-    <>
-      <h2>Welcome!</h2>
+    <main>
+      <h1>Welcome {loggedUser.user.firstName}!</h1>
 
       <table className={styles.MembersTable}>
         <thead>
           <tr>
             <th>First name</th>
             <th>Last name</th>
-
             <th className={styles.AgeControl}>
               {/* This is where the user can sort the age from small to big, and from big to small */}
               <span onClick={sortByAge}>
@@ -85,7 +82,6 @@ export default function BrandedMembers() {
                 }}
               />
             </th>
-
             <th className={styles.NotMobile}>Email</th>
           </tr>
         </thead>
@@ -103,17 +99,6 @@ export default function BrandedMembers() {
           )}
         </tbody>
       </table>
-
-      <div className='controls'>
-        <Button
-          onClick={() => {
-            dispatch(signOut());
-            history.push('/');
-          }}>
-          Sign-out
-        </Button>
-        <LinkButton to='/'>Home</LinkButton>
-      </div>
-    </>
+    </main>
   );
 }

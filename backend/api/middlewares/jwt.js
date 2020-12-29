@@ -13,10 +13,15 @@ export const generateToken = (data) => {
 export const authenticateToken = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(' ')[1];
+    if (!token) return res.status(401).json({ message: 'No Authentication provided' });
+
     const decoded = jwt.verify(token, new Buffer.from(process.env.JWT_KEY || 'secret', 'base64'));
-    req.user = decoded;
+    if (!decoded) return res.status(401).json({ message: 'Authentication failed, access denied' });
+
+    req.user = decoded.userId;
     next();
   } catch (error) {
-    return res.status(403).json({ message: 'Authentication failed, access denied' });
+    console.log(error);
+    res.status(500).send();
   }
 };

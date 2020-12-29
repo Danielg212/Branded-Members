@@ -17,42 +17,30 @@ body {
   min-height: 100vh;
 }
 
-.BRANDED-MEMBERS header {
-  height: 100px;
+.BRANDED-MEMBERS main {
+  min-height: calc(100vh - 42vh - 100px);
   display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.BRANDED-MEMBERS header .branded-logo {
-  width: 264px;
-  height: 49px;
-}
-
-.BRANDED-MEMBERS main {
-  min-height: calc(100vh - 100px);
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-}
-
-.BRANDED-MEMBERS main h2 {
+.BRANDED-MEMBERS main h1 {
   color: #eb3756;
+  text-align: center;
 }
 
-.BRANDED-MEMBERS main form {
+.BRANDED-MEMBERS form {
   display: flex;
-  flex-flow: column nowrap;
+  flex-direction: column;
   align-items: center;
 }
 
-.BRANDED-MEMBERS main form .date-group {
+.BRANDED-MEMBERS form .date-group {
   margin-top: 24px;
 }
 
-.BRANDED-MEMBERS main form .date-group input {
+.BRANDED-MEMBERS form .date-group input {
   width: 300px;
   height: 35px;
   padding-left: 10px;
@@ -62,15 +50,5 @@ body {
   color: #fafafa;
   font-size: 14px;
   cursor: pointer;
-}
-
-.BRANDED-MEMBERS main .controls {
-  width: 100%;
-  margin-top: 30px;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  align-items: center;
-  justify-content: space-evenly;
 }
 /*# sourceMappingURL=style.css.map */

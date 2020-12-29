@@ -1,36 +1,23 @@
 import * as constants from './../constants';
 import * as api from './../../api';
 
-export const signUp = (form) => async (dispatch) => {
+export const login = (form) => async (dispatch) => {
   try {
-    const response = await api.signUp(form);
-    const email = response.data.email;
-    dispatch({ type: constants.SIGN_UP, payload: email });
-
-    console.log(`✅ ${response.status} ${response.statusText}`, response.data);
-    alert('Succesfully signed-up! :)');
-  } catch (error) {
-    console.warn(`❌ ${error}`);
-    alert('Failed to sign-up! ' + error.response.data.message);
-  }
-};
-
-export const signIn = (form) => async (dispatch) => {
-  try {
-    const response = await api.signIn(form);
+    const response = await api.login(form);
     const token = response.data.token;
-    dispatch({ type: constants.SIGN_IN, payload: token });
+    const user = response.data.user;
+    dispatch({ type: constants.LOGIN, payload: { token, user } });
 
     console.log(`✅ ${response.status} ${response.statusText}`, response.data);
-    alert('Succesfully signed-in! :)');
+    alert('Login success! :)');
   } catch (error) {
-    console.warn(`❌ ${error}`);
-    alert('Failed to sign-in! ' + error.response.data.message);
+    console.warn(`❌ ${error}` + error.response.data.message);
+    alert('Login fail! :( ' + error.response.data.message);
   }
 };
 
-export const signOut = () => {
-  return { type: constants.SIGN_OUT };
+export const logout = () => {
+  return { type: constants.LOGOUT };
 };
 
 export const getUsers = (token) => async (dispatch) => {

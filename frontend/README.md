@@ -6,20 +6,24 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### Home page:
 
-<img src='./../img/home_ui.png' alt='home page' width='300' />
+<br />
+<img src='./../img/UI/home-false-desktop.png' alt='home unauthorized mobile' width='300' />
+<img src='./../img/UI/home-false-desktop.png' alt='home unauthorized desktop' width='500' />
 
 ### Register page:
 
-<img src='./../img/register_ui.png' alt='register page' width='300' />
+<br />
+<img src='./../img/UI/register-mobile.png' alt='register mobile' width='300' />
+<img src='./../img/UI/register-desktop.png' alt='register desktop' width='500' />
 
 ### Login page:
 
-<img src='./../img/login_ui.png' alt='login page' width='300' />
+<br />
+<img src='./../img/UI/login-mobile.png' alt='login mobile' width='300' />
+<img src='./../img/UI/login-desktop.png' alt='login desktop' width='500' />
 
-### Database content (mobile):
+### Database content:
 
-<img src='./../img/table_mobile_ui.png' alt='database content mobile' width='300' />
-
-### Database content (dekstop):
-
-<img src='./../img/table_desktop_ui.png' alt='database content desktop' width='500' />
+<br />
+<img src='./../img/UI/home-true-desktop.png' alt='home authorized mobile' width='300' />
+<img src='./../img/UI/home-true-desktop.png' alt='home authorized desktop' width='500' />

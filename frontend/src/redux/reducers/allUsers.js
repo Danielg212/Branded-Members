@@ -5,7 +5,7 @@ export const allUsers = (state = [], action) => {
     case constants.GET_USERS:
       return action.payload;
 
-    case constants.SIGN_OUT:
+    case constants.LOGOUT:
       return [];
 
     default:
