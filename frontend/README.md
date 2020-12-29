@@ -7,7 +7,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ### Home page (unauthorized):
 
 <br />
-<img src='./../img/UI/home-false-desktop.png' alt='home unauthorized mobile' width='300' />
+<img src='./../img/UI/home-false-mobile.png' alt='home unauthorized mobile' width='300' />
 <img src='./../img/UI/home-false-desktop.png' alt='home unauthorized desktop' width='500' />
 
 ### Register page:
