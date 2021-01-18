@@ -1,12 +1,26 @@
 import * as constants from './../constants';
 import * as api from './../../api';
 
-export const login = (form) => async (dispatch) => {
+export const signUp = (form) => async (dispatch) => {
+  try {
+    const response = await api.register(form);
+    const email = response.data.email;
+    dispatch({ type: constants.REGISTER, payload: email });
+
+    console.log(`✅ ${response.status} ${response.statusText}`, response.data);
+    alert('Succesfully signed-up! :)');
+  } catch (error) {
+    console.warn(`❌ ${error}`);
+    alert('Failed to sign-up! ' + error.response.data.message);
+  }
+};
+
+export const signIn = (form) => async (dispatch) => {
   try {
     const response = await api.login(form);
     const token = response.data.token;
-    const user = response.data.user;
-    dispatch({ type: constants.LOGIN, payload: { token, user } });
+    const firstName = response.data.firstName;
+    dispatch({ type: constants.LOGIN, payload: { token, firstName } });
 
     console.log(`✅ ${response.status} ${response.statusText}`, response.data);
     alert('Login success! :)');
@@ -16,7 +30,7 @@ export const login = (form) => async (dispatch) => {
   }
 };
 
-export const logout = () => {
+export const signOut = () => {
   return { type: constants.LOGOUT };
 };
 

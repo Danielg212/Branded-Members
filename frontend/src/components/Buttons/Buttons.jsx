@@ -1,6 +1,5 @@
-import React from 'react';
-import styles from './style/Buttons.module.css';
 import { Link } from 'react-router-dom';
+import styles from './style/Buttons.module.css';
 
 export function Button({ children, onClick, type }) {
   return (

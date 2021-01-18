@@ -5,50 +5,23 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #161415;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='30' viewBox='0 0 1000 120'%3E%3Cg fill='none' stroke='%23222' stroke-width='10' %3E%3Cpath d='M-500 75c0 0 125-30 250-30S0 75 0 75s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 45c0 0 125-30 250-30S0 45 0 45s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 105c0 0 125-30 250-30S0 105 0 105s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 15c0 0 125-30 250-30S0 15 0 15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500-15c0 0 125-30 250-30S0-15 0-15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 135c0 0 125-30 250-30S0 135 0 135s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3C/g%3E%3C/svg%3E");
 }
 
-.BRANDED-MEMBERS {
+.app {
   width: 100%;
   min-height: 100vh;
 }
 
-.BRANDED-MEMBERS main {
+main {
   min-height: calc(100vh - 42vh - 100px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-
-.BRANDED-MEMBERS main h1 {
-  color: #eb3756;
-  text-align: center;
-}
-
-.BRANDED-MEMBERS form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.BRANDED-MEMBERS form .date-group {
-  margin-top: 24px;
-}
-
-.BRANDED-MEMBERS form .date-group input {
-  width: 300px;
-  height: 35px;
-  padding-left: 10px;
-  background: linear-gradient(to bottom, #fafafa -42%, #161415 42%);
-  border: 1px solid #7e7e7e;
-  border-radius: 7px;
-  color: #fafafa;
-  font-size: 14px;
-  cursor: pointer;
-}
-/*# sourceMappingURL=style.css.map */

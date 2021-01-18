@@ -13,7 +13,7 @@
   cursor: pointer;
 }
 
-.Button:hover, .Button:active {
+.Button:hover,
+.Button:active {
   font-weight: 900;
 }
-/*# sourceMappingURL=Buttons.module.css.map */

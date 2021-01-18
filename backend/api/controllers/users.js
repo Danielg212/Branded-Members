@@ -23,7 +23,7 @@ export const register = async (req, res, next) => {
 
     // encrypt password
     const salt = await bcrypt.genSalt(10);
-    const encryptedPassword = await bcrypt.hash(req.body.password, await bcrypt.genSalt(10));
+    const encryptedPassword = await bcrypt.hash(req.body.password, salt);
 
     // create new user
     const newUser = new User({
@@ -35,9 +35,11 @@ export const register = async (req, res, next) => {
     });
 
     const savedUser = await newUser.save(); // save new user to collection
-    sendMail(savedUser); // and send email to newly registered user
+    console.log('User created', savedUser);
 
     res.status(201).json({ email: savedUser.email });
+
+    sendMail(savedUser); // and send email to newly registered user
   } catch (error) {
     console.log(error);
     res.status(500).send();
@@ -62,8 +64,10 @@ export const login = async (req, res, next) => {
     if (!isPasswordOk) return res.status(401).json({ message: 'Wrong credentials' }); // if password is not ok
 
     // generate token and send to client
-    const token = generateToken({ userId: foundUser._id });
-    res.status(200).json({ token, user: { firstName: foundUser.firstName } });
+    const token = generateToken(foundUser._id);
+    console.log('Logged in', token);
+
+    res.status(200).json({ token, firstName: foundUser.firstName });
   } catch (error) {
     console.log(error);
     res.status(500).send();
@@ -76,6 +80,7 @@ export const login = async (req, res, next) => {
 export const getUsers = async (req, res, next) => {
   try {
     let foundUsers = await User.find().select('email firstName lastName birthDate');
+    console.log('Users found', foundUsers);
 
     res.status(200).json(foundUsers);
   } catch (error) {

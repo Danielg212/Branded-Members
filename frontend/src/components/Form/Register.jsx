@@ -1,37 +1,36 @@
-import React, { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import * as api from './../../../api';
-import { InputGroup } from './../../InputGroup/InputGroup';
-import { Button } from './../../Buttons/Buttons';
+import { signUp } from '../../redux/actions';
+import styles from './style/Form.module.css';
+import { InputGroup } from '../InputGroup/InputGroup';
+import { Button } from '../Buttons/Buttons';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-export default function Register() {
+export default function Register({ user }) {
   const history = useHistory();
+  const dispatch = useDispatch();
 
-  const [birthDate, setBirthDate] = React.useState('');
   const { register, handleSubmit, errors, watch } = useForm({});
   const password = useRef({}); // used so I can compare the password and confirmed password
   password.current = watch('password', '');
+  const [birthDate, setBirthDate] = useState('');
 
   const onSubmit = async (values) => {
-    try {
-      const response = await api.register({ ...values, birthDate });
-      const email = response.data.email;
-
-      console.log(`✅ ${response.status} ${response.statusText}`, response.data);
-      alert('Succesfully signed-up! :)');
-      history.push(`/login/${email}`);
-    } catch (error) {
-      console.warn(`❌ ${error}`);
-      alert('Failed to sign-up! ' + error.response.data.message);
-    }
+    dispatch(signUp({ ...values, birthDate }));
   };
+
+  // redirect when email has been received from the server,
+  // meaning register success
+  useEffect(() => {
+    if (user?.email) history.push(`/login`);
+  }, [user?.email, history]);
 
   return (
     <main>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <InputGroup
           name='firstName'
           placeholder='First name:'
@@ -89,7 +88,7 @@ export default function Register() {
           {errors.confirmPassword && errors.confirmPassword.message}
         </InputGroup>
 
-        <div className='date-group'>
+        <div className={styles.dateGroup}>
           <DatePicker
             placeholderText='Birth date:'
             selected={birthDate}

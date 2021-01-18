@@ -1,15 +1,14 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { logout } from '../../../redux/actions';
-import { Button, LinkButton } from '../../Buttons/Buttons';
-import BrandedLogo from './img/logo.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { signOut } from '../../redux/actions';
 import styles from './style/Header.module.css';
+import BrandedLogo from './img/logo.png';
+import { Button, LinkButton } from '../Buttons/Buttons';
 
 function Header() {
-  const loggedUser = useSelector((state) => state.loggedUser);
-  const dispatch = useDispatch();
   const history = useHistory();
+  const dispatch = useDispatch();
+  const { isLoggedIn } = useSelector((state) => state.loggedUser);
 
   return (
     <header className={styles.Header}>
@@ -21,8 +20,8 @@ function Header() {
       />
 
       <div className={styles.Controls}>
-        {loggedUser.user ? (
-          <Button onClick={() => dispatch(logout())}>Logout</Button>
+        {isLoggedIn ? (
+          <Button onClick={() => dispatch(signOut())}>Logout</Button>
         ) : (
           <>
             <LinkButton to='/login'>Login</LinkButton>

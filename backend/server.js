@@ -1,36 +1,41 @@
-import mongoose from 'mongoose'; // MongoDB
-import express from 'express'; // Backend App
+import mongoose from 'mongoose'; // MongoDB (database)
+import express from 'express'; // Backend App (server)
+import cors from 'cors'; // HTTP headers (enable requests)
+import morgan from 'morgan'; // Logs incoming requests
+import helmet from 'helmet'; // Secures response headers
 import dotenv from 'dotenv'; // Secures content
-import cors from 'cors'; // HTTP requests
 import usersRoutes from './api/routes/users.js';
 
 // init app
 const app = express();
-dotenv.config();
 
 // middlewares
 app.use(express.json()); // body parser
-app.use(express.urlencoded({ extended: false })); // url parser
+app.use(express.urlencoded()); // url parser
 app.use(cors()); // enable http requests
+app.use(morgan('common')); // logs requests
+app.use(helmet()); // protect response headers
+dotenv.config();
 
-// configure db --->            if you want to connect to cloud server: edit "CONNECTION_URL" in -> .env file
-const DB_NAME = 'brandedDB'; // if you want to use local server: edit this "DB_NAME" (and remove the "CONNECTION_URL" from -> .env file)
+// configure db:
+// if you want to connect to cloud server (atlas): edit "CONNECTION_URL" in -> .env file
+// if you want to use local server (community): edit "DB_NAME"
+const DB_NAME = 'brandedDB';
 const CONNECTION_URL = process.env.CONNECTION_URL || `mongodb://localhost:27017/${DB_NAME}`;
 const PORT = process.env.PORT || 8080; // 8080 === development port
-const DEPRECATED_FIX = { useNewUrlParser: true, useUnifiedTopology: true }; // change this with (possible) warnings on first connection
+const DEPRECATED_FIX = { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }; // update this with (possible) deprecated warnings
 
 // connect to db
-// mongoose connections   --->   https://mongoosejs.com/docs/connections.html
 mongoose
   .connect(CONNECTION_URL, DEPRECATED_FIX)
-  .catch((error) => console.log('❌ MongoDB:', error)); // listen for errors on initial connection
-mongoose.connection.on('connected', () => console.log('✅ MongoDB connected'));
-mongoose.connection.on('error', (error) => console.log('❌ MongoDB:', error)); // listen for errors after the connection is established (errors during the session)
-mongoose.connection.on('disconnected', () => console.log('❌ MongoDB disconnected'));
-mongoose.set('useCreateIndex', true);
-// ^ ^ ^ uncomment this if you use the "unique: true" property in a Schema
+  .catch((error) => console.log('❌ MongoDB connection error', error)); // listen for errors on initial connection
+mongoose.connection.on('connected', () => console.log('✅ MongoDB connected')); // connected
+mongoose.connection.on('disconnected', () => console.log('❌ MongoDB disconnected')); // disconnected
+mongoose.connection.on('error', (error) => console.log('❌ MongoDB connection error', error)); // listen for errors after the connection is established (errors during the session)
 
-app.use('/api/v1/users', usersRoutes); // get & post requests
+// routes
+app.get('/', (request, response, next) => response.send('Hello Developer :)'));
+app.use('/api/v1/users', usersRoutes);
 
 // server is listening for requests
 app.listen(PORT, () => console.log(`✅ Server is listening on port: ${PORT}`));

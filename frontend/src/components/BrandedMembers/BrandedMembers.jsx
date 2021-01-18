@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsers } from './../../../redux/actions';
-import SortIcon from './../../SortIcon';
+import { getUsers } from '../../redux/actions';
 import styles from './style/BrandedMembers.module.css';
+import SortIcon from './icon/SortIcon';
 
 export default function BrandedMembers() {
   const dispatch = useDispatch();
@@ -62,7 +62,7 @@ export default function BrandedMembers() {
 
   return (
     <main>
-      <h1>Welcome {loggedUser.user.firstName}!</h1>
+      <h1 className={styles.title}>Welcome {loggedUser.user.firstName}!</h1>
 
       <table className={styles.MembersTable}>
         <thead>

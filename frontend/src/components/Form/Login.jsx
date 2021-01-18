@@ -1,36 +1,35 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { login } from './../../../redux/actions';
-import { InputGroup } from './../../InputGroup/InputGroup';
-import { Button } from './../../Buttons/Buttons';
+import { signIn } from '../../redux/actions';
+import styles from './style/Form.module.css';
+import { InputGroup } from '../InputGroup/InputGroup';
+import { Button } from '../Buttons/Buttons';
 
-export default function Login() {
-  const dispatch = useDispatch();
+export default function Login({ user }) {
   const history = useHistory();
-  const { newemail } = useParams();
+  const dispatch = useDispatch();
 
-  const loggedUser = useSelector((state) => state.loggedUser);
   const { register, handleSubmit, errors } = useForm({
     defaultValues: {
-      email: newemail,
+      email: user?.email,
     },
   });
 
-  // once the response came back from the server,
-  // this useEffect will recognise the change in Redux and redirect the user automatically
-  useEffect(() => {
-    if (loggedUser.user) history.push('/');
-  }, [history, loggedUser.user]);
-
   const onSubmit = (values) => {
-    dispatch(login(values));
+    dispatch(signIn(values));
   };
+
+  // once the user is logged in,
+  // this useEffect will redirect the user to the homepage
+  useEffect(() => {
+    if (user?.firstName) history.push('/');
+  }, [user?.firstName, history]);
 
   return (
     <main>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <InputGroup
           name='email'
           type='email'
