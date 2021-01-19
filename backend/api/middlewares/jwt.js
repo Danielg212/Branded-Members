@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
-const secret = process.env.JWT_SECRET || 'secret';
+dotenv.config();
+const secret = process.env.JWT_SECRET;
 // "secret key" generator   --->   https://www.allkeysgenerator.com/Random/Security-Encryption-Key-Generator.aspx
 // Reminder: make sure to set up a secret key in .env (the presented 'secret' is not production valid)
 

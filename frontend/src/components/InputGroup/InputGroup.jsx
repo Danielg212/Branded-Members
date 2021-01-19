@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './style/InputGroup.module.css';
 
 export function Input({ formHook, value, onChange, name, type, placeholder }) {
