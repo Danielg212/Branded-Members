@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './style/style.css';
@@ -7,7 +8,7 @@ import BrandedMembers from './components/BrandedMembers/BrandedMembers';
 import Login from './components/Form/Login';
 import Register from './components/Form/Register';
 
-function App() {
+export default function App() {
   const { user } = useSelector((state) => state.loggedUser);
 
   return (
@@ -27,5 +28,3 @@ function App() {
     </Router>
   );
 }
-
-export default App;
