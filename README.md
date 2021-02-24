@@ -1,6 +1,5 @@
 # Branded Members
 
-Interview assignment @ [https://www.branded.co.il](https://www.branded.co.il)
 
 ## How to engage the app:
 
